@@ -7,13 +7,16 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +24 src/App.tsx
+badd +4 src/App.tsx
 badd +4 src/index.tsx
-badd +33 src/components/PropertyList.component.tsx
-badd +13 src/components/Navbar.component.tsx
+badd +14 src/components/Navbar.component.tsx
+badd +52 src/components/LogIn.component.tsx
+badd +6 src/helpers/auth.helpers.tsx
+badd +64 src/components/Create.component.tsx
+badd +1 ~/Documents/Github/nextproperty_frontend/src/components/List.component.tsx
 argglobal
 %argdel
-edit src/App.tsx
+edit src/components/Create.component.tsx
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -29,24 +32,24 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 124 + 124) / 249)
 exe 'vert 2resize ' . ((&columns * 124 + 124) / 249)
 argglobal
-let s:l = 23 - ((22 * winheight(0) + 34) / 69)
+let s:l = 79 - ((54 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-23
-normal! 025|
+79
+normal! 057|
 wincmd w
 argglobal
-if bufexists("src/components/PropertyList.component.tsx") | buffer src/components/PropertyList.component.tsx | else | edit src/components/PropertyList.component.tsx | endif
+if bufexists("src/components/LogIn.component.tsx") | buffer src/components/LogIn.component.tsx | else | edit src/components/LogIn.component.tsx | endif
 if &buftype ==# 'terminal'
-  silent file src/components/PropertyList.component.tsx
+  silent file src/components/LogIn.component.tsx
 endif
-let s:l = 32 - ((31 * winheight(0) + 34) / 69)
+let s:l = 51 - ((42 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-32
-normal! 033|
+51
+normal! 042|
 wincmd w
 exe 'vert 1resize ' . ((&columns * 124 + 124) / 249)
 exe 'vert 2resize ' . ((&columns * 124 + 124) / 249)
