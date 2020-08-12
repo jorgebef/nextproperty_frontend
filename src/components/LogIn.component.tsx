@@ -48,6 +48,7 @@ export default function SignIn(): React.ReactElement {
                             <div className="form-group">
                                 <input
                                     type="text"
+                                    name="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="email"
@@ -56,6 +57,7 @@ export default function SignIn(): React.ReactElement {
                                 />
                                 <input
                                     type="password"
+                                    name="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="password"

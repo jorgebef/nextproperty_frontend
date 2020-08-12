@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 export default function Create(): React.ReactElement {
     // Set the state and use properties in the state
     const [property, setProperty] = useState({ ref: '', title: '', description: '' });
+    const [ref, setRef] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [apiData, setApiData] = useState({ action: {}, props: [] });
     const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || null);
 
@@ -40,7 +43,7 @@ export default function Create(): React.ReactElement {
         /* alert(jwtToken); */
     }, [apiData]);
 
-    const updateField = (e: any) => {
+    const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProperty({
             ...property,
             [e.target.name]: e.target.value,
@@ -60,6 +63,7 @@ export default function Create(): React.ReactElement {
                             <div className="form-group">
                                 <input
                                     type="text"
+                                    name="ref"
                                     value={property.ref}
                                     onChange={updateField}
                                     placeholder="Reference"
@@ -68,6 +72,7 @@ export default function Create(): React.ReactElement {
                                 />
                                 <input
                                     type="text"
+                                    name="title"
                                     value={property.title}
                                     onChange={updateField}
                                     placeholder="Title goes here"
@@ -75,10 +80,11 @@ export default function Create(): React.ReactElement {
                                 />
                                 <input
                                     type="text"
+                                    name="description"
                                     value={property.description}
                                     onChange={updateField}
-                                    className="form-control"
                                     placeholder="Description..."
+                                    className="form-control"
                                 />
                             </div>
                             <button className="btn btn-success btn-block" type="submit">

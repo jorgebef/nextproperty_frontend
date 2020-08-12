@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 export default function Navbar(): React.ReactElement {
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-xl-2">
-            <a className="navbar-brand mr-5" href="#">
-                NextProperty Panel
-            </a>
+            <a className="navbar-brand mr-5">NextProperty Panel</a>
             <div className="collapse navbar-collapse" id="navbarColor02">
                 <ul className="navbar-nav mr-auto">
                     <li className="active">
