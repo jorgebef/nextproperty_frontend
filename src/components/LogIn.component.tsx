@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { AppContext } from '../App';
 /* import { LogIn } from '../helpers/auth.helpers'; */
-/* import axios from 'axios'; */
 
 export default function SignIn(): React.ReactElement {
     // Set the state and use properties in the state
+
+    const ctx = React.useContext(AppContext);
+
+    if (ctx.jwtToken.get != '') {
+        localStorage.setItem('jwtToken', ctx.jwtToken.get);
+        window.location.href = '/api/list';
+    }
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || null);
 
     const handleSubmit = (evt: React.FormEvent) => {
         evt.preventDefault();
@@ -15,14 +22,14 @@ export default function SignIn(): React.ReactElement {
         /* setjwtToken(LogIn(email, password, evt)); */
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwtToken}` },
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
             body: JSON.stringify({ email, password }),
         };
 
         fetch('http://localhost:5000/api/login', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setjwtToken(data.token);
+                ctx.jwtToken.set(data.token);
             })
             .catch((error) => {
                 alert(error);
@@ -30,14 +37,6 @@ export default function SignIn(): React.ReactElement {
         // ------------------------------------------------
         // ------------------------------------------------
     };
-
-    React.useEffect(() => {
-        if (jwtToken != null) {
-            localStorage.setItem('jwtToken', jwtToken);
-            window.location.href = '/api/list';
-            /* alert(jwtToken); */
-        }
-    }, [jwtToken]);
 
     return (
         <div className="row">

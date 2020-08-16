@@ -1,47 +1,25 @@
 import React, { useState } from 'react';
-/* import axios from 'axios'; */
+import { AppContext } from '../App';
+import { PropType } from '../helpers/types';
+import { isLogged } from '../helpers/auth.helpers';
+import { handleCreate, getPropList } from '../helpers/crud.helpers';
 
 export default function Create(): React.ReactElement {
     // Set the state and use properties in the state
-    const [property, setProperty] = useState({ ref: '', title: '', description: '' });
-    const [ref, setRef] = useState('');
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [apiData, setApiData] = useState({ action: {}, props: [] });
-    const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || null);
+    const [property, setProperty] = useState<PropType>({
+        _id: '',
+        ref: '',
+        title: '',
+        description: '',
+    });
 
-    const handleCreate = (evt: React.FormEvent) => {
-        /* const requestOptions = { */
-        /*     method: 'POST', */
-        /*     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwtToken}` }, */
-        /*     body: JSON.stringify({}), */
-        /* }; */
-        /* fetch('http://localhost:5000/api/properties/create', requestOptions) */
-        /*     .then((res) => res.json()) */
-        /*     .then((data) => { */
-        /*         setApiData(data); */
-        /*     }) */
-        /*     .catch((error) => { */
-        /*         console.log(error); */
-        /*     }); */
-        alert(JSON.stringify(property));
-    };
+    const ctx = React.useContext(AppContext);
+
+    isLogged(ctx);
 
     React.useEffect(() => {
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwtToken}` },
-        };
-        fetch('http://localhost:5000/api/properties/list', requestOptions)
-            .then((res) => res.json())
-            .then((data) => {
-                setApiData(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        /* alert(jwtToken); */
-    }, [apiData]);
+        getPropList(ctx);
+    }, [Create]);
 
     const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProperty({
@@ -50,16 +28,12 @@ export default function Create(): React.ReactElement {
         });
     };
 
-    React.useEffect(() => {
-        if (jwtToken == null) window.location.href = '/api/login';
-    }, [jwtToken]);
-
     return (
         <div className="row">
             <div className="col-md-4 offset-md-4">
                 <div className="card">
                     <div className="card-body">
-                        <form onSubmit={handleCreate}>
+                        <form onSubmit={handleCreate(ctx, property)}>
                             <div className="form-group">
                                 <input
                                     type="text"

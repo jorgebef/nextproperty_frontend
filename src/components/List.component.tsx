@@ -1,38 +1,19 @@
-import React, { useState } from 'react';
-/* import axios from 'axios'; */
-
-type PropType = {
-    _id: string;
-    ref: string;
-    title: string;
-    description: string;
-};
+import React from 'react';
+import { AppContext } from '../App';
+import { PropType } from '../helpers/types';
+import { isLogged } from '../helpers/auth.helpers';
+import { getPropList } from '../helpers/crud.helpers';
 
 export default function List(): React.ReactElement {
     // Set the state and use properties in the state
-    const [apiData, setApiData] = useState({ action: {}, props: [] });
-    const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || null);
-
-    const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwtToken}` },
-    };
+    /* alert(jwtToken); */
+    const ctx = React.useContext(AppContext);
+    /* const [propList, setPropList] = React.useState([]); */
+    isLogged(ctx.jwtToken.get);
 
     React.useEffect(() => {
-        fetch('http://localhost:5000/api/properties/list', requestOptions)
-            .then((res) => res.json())
-            .then((data) => {
-                setApiData(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        /* alert(jwtToken); */
-    }, [apiData]);
-
-    React.useEffect(() => {
-        if (jwtToken == null) window.location.href = '/api/login';
-    }, [jwtToken]);
+        getPropList(ctx);
+    }, [List]);
 
     return (
         <div className="container-fluid">
@@ -46,7 +27,7 @@ export default function List(): React.ReactElement {
             </div>
 
             <div className="row justify-content-center pl-xl-5 pr-xl-5">
-                {apiData.props.map((property: PropType, key: number | string) => {
+                {ctx.propList.get.map((property: PropType, key: number | string) => {
                     return (
                         <div
                             key={key + property._id}
@@ -66,10 +47,7 @@ export default function List(): React.ReactElement {
                                 <p className="overflow-hidden card-text">{property.description}</p>
                             </div>
                             <ul className="list-group list-group-flush align-self-stretch align-items-center">
-                                <li className="list-group-item">
-                                    Cras alskdjflakjdslfk alsdlkajdfi ao sdij foadj foaikj dfokajsdofi adofj aoskjusto
-                                    odio
-                                </li>
+                                <li className="list-group-item">Cras alskdjflakjdslfk adofj aoskjusto</li>
                                 <li className="list-group-item">Dapibus ac facilisis in</li>
                                 <li className="list-group-item">Vestibulum at eros</li>
                             </ul>
@@ -77,7 +55,7 @@ export default function List(): React.ReactElement {
                                 <a href={'/api/properties/delete/' + property._id} className="btn btn-danger">
                                     Delete
                                 </a>
-                                <a href={'/api/properties/edit/' + property._id} className="btn btn-secondary">
+                                <a href={`/api/edit/${property._id}`} className="btn btn-secondary">
                                     Edit
                                 </a>
                             </div>

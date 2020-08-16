@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { AppContext } from '../App';
 import { Link } from 'react-router-dom';
 /* import axios from 'axios'; */
 
 export default function Navbar(): React.ReactElement {
+    const ctx = React.useContext(AppContext);
+
+    function LogOut(): void {
+        ctx.jwtToken.set('');
+        localStorage.setItem('jwtToken', '');
+        window.location.href = '/api/login';
+    }
+
+    let button: ReactElement;
+    if (!ctx.auth.get) {
+        button = (
+            <Link to="/api/login" className="btn btn-success">
+                Sign In
+            </Link>
+        );
+    } else {
+        button = (
+            <button onClick={LogOut} className="btn btn-danger">
+                Sign Out
+            </button>
+        );
+    }
+
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-xl-2">
             <a className="navbar-brand mr-5">NextProperty Panel</a>
@@ -29,20 +53,8 @@ export default function Navbar(): React.ReactElement {
                         </a>
                     </li>
                 </ul>
-
-                {/* <a className="navbar-brand"> Welcome </a> */}
-                <Link to="/api/login" className="btn btn-success">
-                    Sign In
-                </Link>
-                <button onClick={LogOut} className="btn btn-danger">
-                    Sign Out
-                </button>
+                {button}
             </div>
         </nav>
     );
-}
-
-function LogOut(): void {
-    localStorage.setItem('jwtToken', '');
-    window.location.href = '/api/login';
 }
