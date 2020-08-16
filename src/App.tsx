@@ -1,4 +1,4 @@
-import React, { useState, DispatchWithoutAction, SetStateAction, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import List from './components/List.component';
@@ -13,22 +13,12 @@ export const AppContext: React.Context<any> = React.createContext({});
 function App(): React.ReactElement {
     // Array<string | React.Dispatch<SetStateAction<string>>> is the type for the state hooks
     const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || '');
-    const [propList, setPropList] = React.useState([]);
-    /* const [apiData, setApiData] = useState({ action: {}, props: [] }); */
+    const [propList, setPropList] = useState([]);
     const [auth, setAuth] = useState(false);
-
-    useEffect(() => {
-        if (jwtToken == '') {
-            setAuth(false);
-        } else {
-            setAuth(true);
-        }
-    }, [jwtToken]);
 
     const ctx = {
         jwtToken: { get: jwtToken, set: setjwtToken },
         propList: { get: propList, set: setPropList },
-        /* apiData: { get: apiData, set: setApiData }, */
         auth: { get: auth, set: setAuth },
     };
 

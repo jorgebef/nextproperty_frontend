@@ -1,10 +1,14 @@
 import React, { ReactElement } from 'react';
 import { AppContext } from '../App';
 import { Link } from 'react-router-dom';
+import { isAuth } from '../helpers/auth.helpers';
 /* import axios from 'axios'; */
 
 export default function Navbar(): React.ReactElement {
     const ctx = React.useContext(AppContext);
+
+    // Makes sure the user is authenticated!!!!!!!
+    isAuth(ctx); // <=======================
 
     function LogOut(): void {
         ctx.jwtToken.set('');
@@ -41,16 +45,6 @@ export default function Navbar(): React.ReactElement {
                         <Link className="nav-link" to="/api/list">
                             List
                         </Link>
-                    </li>
-                    <li className="active">
-                        <a className="nav-link" href="#">
-                            Edit
-                        </a>
-                    </li>
-                    <li className="active">
-                        <a className="nav-link" href="#">
-                            Delete
-                        </a>
                     </li>
                 </ul>
                 {button}

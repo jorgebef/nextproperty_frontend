@@ -15,16 +15,12 @@ import React, { useState } from 'react';
 import { AppContext } from '../App';
 import { useParams } from 'react-router-dom';
 import { PropType } from '../helpers/types';
-import { isLogged } from '../helpers/auth.helpers';
 import { getPropSingle } from '../helpers/crud.helpers';
 
 export default function Edit(): React.ReactElement {
     // Set the state and use properties in the state
     const { id } = useParams();
     const ctx = React.useContext(AppContext);
-
-    /* if (ctx.jwtToken.get == '') window.location.href = '/api/login'; */
-    isLogged(ctx.jwtToken.get);
 
     const [property, setProperty] = useState<PropType>({
         _id: '',

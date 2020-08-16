@@ -3,23 +3,17 @@ import { AppContext } from '../App';
 /* import { LogIn } from '../helpers/auth.helpers'; */
 
 export default function SignIn(): React.ReactElement {
-    // Set the state and use properties in the state
-
+    // use the context from App parent component
     const ctx = React.useContext(AppContext);
 
-    if (ctx.jwtToken.get != '') {
-        localStorage.setItem('jwtToken', ctx.jwtToken.get);
-        window.location.href = '/api/list';
-    }
-
+    // Declare the local state we will need only for this component
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // HAVE TO MOVE THIS TO auth.helpers ==============================================
     const handleSubmit = (evt: React.FormEvent) => {
         evt.preventDefault();
-        /* console.log(`handleSubmit count ${counter}`); */
 
-        /* setjwtToken(LogIn(email, password, evt)); */
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
@@ -30,13 +24,14 @@ export default function SignIn(): React.ReactElement {
             .then((response) => response.json())
             .then((data) => {
                 ctx.jwtToken.set(data.token);
+                localStorage.setItem('jwtToken', data.token);
+                ctx.auth.set(true);
             })
             .catch((error) => {
                 alert(error);
             });
-        // ------------------------------------------------
-        // ------------------------------------------------
     };
+    // ================================================================================
 
     return (
         <div className="row">

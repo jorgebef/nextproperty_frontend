@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { AppContext } from '../App';
 import { PropType } from '../helpers/types';
-import { isLogged } from '../helpers/auth.helpers';
-import { handleCreate, getPropList } from '../helpers/crud.helpers';
+import { crudCreate, getPropList } from '../helpers/crud.helpers';
 
 export default function Create(): React.ReactElement {
     // Set the state and use properties in the state
@@ -15,7 +14,10 @@ export default function Create(): React.ReactElement {
 
     const ctx = React.useContext(AppContext);
 
-    isLogged(ctx);
+    const handleCreate = (e: React.FormEvent) => {
+        e.preventDefault();
+        crudCreate(ctx, property);
+    };
 
     React.useEffect(() => {
         getPropList(ctx);
@@ -33,7 +35,7 @@ export default function Create(): React.ReactElement {
             <div className="col-md-4 offset-md-4">
                 <div className="card">
                     <div className="card-body">
-                        <form onSubmit={handleCreate(ctx, property)}>
+                        <form onSubmit={handleCreate}>
                             <div className="form-group">
                                 <input
                                     type="text"

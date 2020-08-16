@@ -1,15 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
 import { PropType } from '../helpers/types';
-import { isLogged } from '../helpers/auth.helpers';
 import { getPropList } from '../helpers/crud.helpers';
 
 export default function List(): React.ReactElement {
     // Set the state and use properties in the state
-    /* alert(jwtToken); */
     const ctx = React.useContext(AppContext);
-    /* const [propList, setPropList] = React.useState([]); */
-    isLogged(ctx.jwtToken.get);
 
     React.useEffect(() => {
         getPropList(ctx);
@@ -55,9 +52,9 @@ export default function List(): React.ReactElement {
                                 <a href={'/api/properties/delete/' + property._id} className="btn btn-danger">
                                     Delete
                                 </a>
-                                <a href={`/api/edit/${property._id}`} className="btn btn-secondary">
+                                <Link className="btn btn-secondary" to={`/api/edit/${property._id}`}>
                                     Edit
-                                </a>
+                                </Link>
                             </div>
                             <div className="card-footer text-muted align-self-stretch">
                                 <b>2 days ago</b>
