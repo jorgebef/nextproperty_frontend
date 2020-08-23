@@ -10,7 +10,7 @@ export default function List(): React.ReactElement {
 
     React.useEffect(() => {
         getPropList(ctx);
-    }, [List]);
+    }, []);
 
     return (
         <div className="container-fluid">
@@ -49,10 +49,10 @@ export default function List(): React.ReactElement {
                                 <li className="list-group-item">Vestibulum at eros</li>
                             </ul>
                             <div className="card-footer align-items-center align-self-stretch">
-                                <a href={'/api/properties/delete/' + property._id} className="btn btn-danger">
+                                <Link to={`/api/delete/${property._id}`} className="btn btn-danger">
                                     Delete
-                                </a>
-                                <Link className="btn btn-secondary" to={`/api/edit/${property._id}`}>
+                                </Link>
+                                <Link to={`/api/edit/${property._id}`} className="btn btn-secondary">
                                     Edit
                                 </Link>
                             </div>

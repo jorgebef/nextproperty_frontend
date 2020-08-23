@@ -8,15 +8,16 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +11 src/App.tsx
-badd +11 src/components/Navbar.component.tsx
-badd +9 src/components/LogIn.component.tsx
-badd +4 src/components/Edit.component.tsx
 badd +1 src/helpers/crud.helpers.ts
-badd +1 src/components/Delete.component.tsx
-badd +17 src/helpers/auth.helpers.ts
+badd +1 src/helpers/auth.helpers.ts
+badd +27 src/components/List.component.tsx
+badd +10 src/helpers/cookie.helpers.ts
+badd +14 src/components/Navbar.component.tsx
+badd +15 src/routers/DashboardRoutes.tsx
+badd +35 src/components/Edit.component.tsx
 argglobal
 %argdel
-edit src/components/Delete.component.tsx
+edit src/helpers/auth.helpers.ts
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -31,25 +32,24 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 124 + 124) / 249)
 exe 'vert 2resize ' . ((&columns * 124 + 124) / 249)
 argglobal
-let s:l = 1 - ((0 * winheight(0) + 34) / 69)
+let s:l = 60 - ((53 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+60
 normal! 0
-lcd ~/Documents/Github/nextproperty_frontend
 wincmd w
 argglobal
-if bufexists("~/Documents/Github/nextproperty_frontend/src/helpers/crud.helpers.ts") | buffer ~/Documents/Github/nextproperty_frontend/src/helpers/crud.helpers.ts | else | edit ~/Documents/Github/nextproperty_frontend/src/helpers/crud.helpers.ts | endif
+if bufexists("src/components/Navbar.component.tsx") | buffer src/components/Navbar.component.tsx | else | edit src/components/Navbar.component.tsx | endif
 if &buftype ==# 'terminal'
-  silent file ~/Documents/Github/nextproperty_frontend/src/helpers/crud.helpers.ts
+  silent file src/components/Navbar.component.tsx
 endif
-let s:l = 1 - ((0 * winheight(0) + 34) / 69)
+let s:l = 13 - ((12 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+13
+normal! 012|
 wincmd w
 exe 'vert 1resize ' . ((&columns * 124 + 124) / 249)
 exe 'vert 2resize ' . ((&columns * 124 + 124) / 249)

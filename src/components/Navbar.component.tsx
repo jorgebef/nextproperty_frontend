@@ -1,22 +1,19 @@
 import React, { ReactElement } from 'react';
 import { AppContext } from '../App';
 import { Link } from 'react-router-dom';
-import { isAuth } from '../helpers/auth.helpers';
+import { LogOut } from '../helpers/auth.helpers';
 /* import axios from 'axios'; */
 
 export default function Navbar(): React.ReactElement {
     const ctx = React.useContext(AppContext);
 
-    // Makes sure the user is authenticated!!!!!!!
-    isAuth(ctx); // <=======================
-
-    function LogOut(): void {
-        ctx.jwtToken.set('');
-        localStorage.setItem('jwtToken', '');
-        window.location.href = '/api/login';
-    }
-
     let button: ReactElement;
+
+    const signOut = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        e.preventDefault();
+        LogOut(ctx);
+    };
+
     if (!ctx.auth.get) {
         button = (
             <Link to="/api/login" className="btn btn-success">
@@ -25,7 +22,7 @@ export default function Navbar(): React.ReactElement {
         );
     } else {
         button = (
-            <button onClick={LogOut} className="btn btn-danger">
+            <button onClick={signOut} className="btn btn-danger">
                 Sign Out
             </button>
         );

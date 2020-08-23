@@ -1,12 +1,11 @@
 import { PropType } from './types';
 
-export const crudCreate = (ctx: React.ComponentState, property: PropType): void => {
-    const requestOptions = {
+export const crudCreate = (property: PropType): void => {
+    fetch('http://localhost:5000/api/properties/create', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...property }),
-    };
-    fetch('http://localhost:5000/api/properties/create', requestOptions)
+    })
         .then((res) => {
             res.json();
             window.location.href = '/api/list';
@@ -17,13 +16,26 @@ export const crudCreate = (ctx: React.ComponentState, property: PropType): void 
     /* alert(JSON.stringify(property)); */
 };
 
-export const crudEdit = (ctx: React.ComponentState, property: PropType, id: string): void => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
+export const crudEdit = (property: PropType, id: string): void => {
+    fetch(`http://localhost:5000/api/property/edit/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...property }),
-    };
-    fetch(`http://localhost:5000/api/property/${id}`, requestOptions)
+        credentials: 'include',
+    })
+        .then((res) => {
+            res.json();
+            window.location.href = '/api/list';
+        })
+        .catch((error) => console.log(error));
+};
+
+export const crudDelete = (id: string): void => {
+    fetch(`http://localhost:5000/api/property/delete/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+    })
         .then((res) => {
             res.json();
             window.location.href = '/api/list';
@@ -32,11 +44,11 @@ export const crudEdit = (ctx: React.ComponentState, property: PropType, id: stri
 };
 
 export const getPropList = (ctx: React.ComponentState): void => {
-    const requestOptions = {
+    fetch('http://localhost:5000/api/properties/list', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
-    };
-    fetch('http://localhost:5000/api/properties/list', requestOptions)
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+    })
         .then((res) => res.json())
         .then((data) => {
             ctx.propList.set(data.props);
@@ -46,12 +58,12 @@ export const getPropList = (ctx: React.ComponentState): void => {
         });
 };
 
-export const getPropSingle = async (ctx: React.ComponentState, id: string): Promise<PropType> => {
-    const requestOptions = {
+export const getPropSingle = async (id: string): Promise<PropType> => {
+    return await fetch(`http://localhost:5000/api/property/${id}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
-    };
-    return await fetch(`http://localhost:5000/api/property/${id}`, requestOptions)
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+    })
         .then((res) => res.json())
         .then((data) => {
             return data.props;

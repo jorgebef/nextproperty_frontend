@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AppContext } from '../App';
-/* import { LogIn } from '../helpers/auth.helpers'; */
+import { logIn } from '../helpers/auth.helpers';
 
 export default function SignIn(): React.ReactElement {
     // use the context from App parent component
@@ -9,29 +9,14 @@ export default function SignIn(): React.ReactElement {
     // Declare the local state we will need only for this component
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    // HAVE TO MOVE THIS TO auth.helpers ==============================================
-    const handleSubmit = (evt: React.FormEvent) => {
+    const handleSubmit = async (evt: React.FormEvent) => {
         evt.preventDefault();
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ctx.jwtToken.get}` },
-            body: JSON.stringify({ email, password }),
-        };
-
-        fetch('http://localhost:5000/api/login', requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                ctx.jwtToken.set(data.token);
-                localStorage.setItem('jwtToken', data.token);
-                ctx.auth.set(true);
-            })
-            .catch((error) => {
-                alert(error);
-            });
+        setLoading(true);
+        await logIn(ctx, email, password);
+        setLoading(false);
     };
-    // ================================================================================
 
     return (
         <div className="row">
@@ -59,7 +44,7 @@ export default function SignIn(): React.ReactElement {
                                 />
                             </div>
                             <button className="btn btn-success btn-block" disabled={!password || !email} type="submit">
-                                Login
+                                {loading ? 'Logging in...' : 'Log In'}
                             </button>
                         </form>
                     </div>

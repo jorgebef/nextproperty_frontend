@@ -16,7 +16,7 @@ export default function Create(): React.ReactElement {
 
     const handleCreate = (e: React.FormEvent) => {
         e.preventDefault();
-        crudCreate(ctx, property);
+        crudCreate(property);
     };
 
     React.useEffect(() => {

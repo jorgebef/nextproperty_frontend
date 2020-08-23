@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { AppContext } from '../App';
+/* import { AppContext } from '../App'; */
 import { useParams } from 'react-router-dom';
 import { PropType } from '../helpers/types';
 import { getPropSingle, crudEdit } from '../helpers/crud.helpers';
 
 export default function Edit(): React.ReactElement {
     // Set the state and use properties in the state
+    /* const ctx = React.useContext(AppContext); */
     const { id } = useParams();
-    const ctx = React.useContext(AppContext);
 
     const [property, setProperty] = useState<PropType>({
         _id: '',
@@ -17,7 +17,7 @@ export default function Edit(): React.ReactElement {
     });
 
     React.useEffect(() => {
-        getPropSingle(ctx, id).then((p: PropType) => {
+        getPropSingle(id).then((p: PropType) => {
             setProperty({
                 ...property,
                 ...p,
@@ -34,7 +34,7 @@ export default function Edit(): React.ReactElement {
 
     const handleEdit = (e: React.FormEvent) => {
         e.preventDefault();
-        crudEdit(ctx, property, id);
+        crudEdit(property, id);
     };
 
     return (
