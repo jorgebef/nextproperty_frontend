@@ -7,17 +7,16 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +11 src/App.tsx
-badd +1 src/helpers/crud.helpers.ts
-badd +1 src/helpers/auth.helpers.ts
-badd +27 src/components/List.component.tsx
-badd +10 src/helpers/cookie.helpers.ts
-badd +14 src/components/Navbar.component.tsx
-badd +15 src/routers/DashboardRoutes.tsx
-badd +35 src/components/Edit.component.tsx
+badd +47 src/App.tsx
+badd +6 src/helpers/crud.helpers.ts
+badd +29 src/helpers/auth.helpers.ts
+badd +11 src/components/dashboard/Create.tsx
+badd +16 src/helpers/types_variables.ts
+badd +53 src/components/dashboard/ListDash.tsx
+badd +5 ~/Documents/Github/nextproperty_frontend/src/components/dashboard/styles/login.css
 argglobal
 %argdel
-edit src/helpers/auth.helpers.ts
+edit ~/Documents/Github/nextproperty_frontend/src/components/dashboard/styles/login.css
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -29,30 +28,28 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 124 + 124) / 249)
-exe 'vert 2resize ' . ((&columns * 124 + 124) / 249)
+wincmd =
 argglobal
-let s:l = 60 - ((53 * winheight(0) + 34) / 69)
+let s:l = 5 - ((4 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-60
+5
+normal! 015|
+wincmd w
+argglobal
+if bufexists("src/helpers/types_variables.ts") | buffer src/helpers/types_variables.ts | else | edit src/helpers/types_variables.ts | endif
+if &buftype ==# 'terminal'
+  silent file src/helpers/types_variables.ts
+endif
+let s:l = 16 - ((15 * winheight(0) + 34) / 69)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+16
 normal! 0
 wincmd w
-argglobal
-if bufexists("src/components/Navbar.component.tsx") | buffer src/components/Navbar.component.tsx | else | edit src/components/Navbar.component.tsx | endif
-if &buftype ==# 'terminal'
-  silent file src/components/Navbar.component.tsx
-endif
-let s:l = 13 - ((12 * winheight(0) + 34) / 69)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-13
-normal! 012|
-wincmd w
-exe 'vert 1resize ' . ((&columns * 124 + 124) / 249)
-exe 'vert 2resize ' . ((&columns * 124 + 124) / 249)
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { AppContext } from '../App';
-import { PropType } from '../helpers/types';
-import { crudCreate, getPropList } from '../helpers/crud.helpers';
+import { AppContext } from '../../App';
+import { PropType, propertyDefault } from '../../helpers/types_variables';
+import { crudCreate, getPropList } from '../../helpers/crud.helpers';
 
 export default function Create(): React.ReactElement {
     // Set the state and use properties in the state
-    const [property, setProperty] = useState<PropType>({
-        _id: '',
-        ref: '',
-        title: '',
-        description: '',
-    });
+    const [property, setProperty] = useState<PropType>(propertyDefault);
+    const [imgData, setImgData] = useState<FileList>();
 
     const ctx = React.useContext(AppContext);
 
     const handleCreate = (e: React.FormEvent) => {
         e.preventDefault();
-        crudCreate(property);
+        /* alert(property.created_timestamp.toLocaleString('en-GB')); */
+        crudCreate(property, imgData);
+        /* uploadImages(imgData); // DOESNT CURRENTLY WORK <=============== */
     };
 
     React.useEffect(() => {
@@ -26,7 +24,34 @@ export default function Create(): React.ReactElement {
     const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProperty({
             ...property,
+            created_timestamp: Date.now(),
             [e.target.name]: e.target.value,
+        });
+        console.log(imgData);
+    };
+
+    const updateImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const iData: any = [];
+        if (e.target.files) {
+            Array.prototype.forEach.call(e.target.files, (file) => {
+                iData.push(file);
+            });
+            console.log(iData);
+        }
+
+        if (e.target.files) setImgData(e.target.files);
+
+        // This is only for the array that goes in the database
+        const imgArray: Array<string> = [];
+        Array.prototype.forEach.call(e.target.files, (file) => {
+            imgArray.push(file.name);
+            console.log(imgArray);
+        });
+
+        setProperty({
+            ...property,
+            created_timestamp: Date.now(),
+            images: imgArray,
         });
     };
 
@@ -60,6 +85,14 @@ export default function Create(): React.ReactElement {
                                     value={property.description}
                                     onChange={updateField}
                                     placeholder="Description..."
+                                    className="form-control"
+                                />
+                                <input
+                                    type="file"
+                                    name="images"
+                                    id="customFile"
+                                    multiple
+                                    onChange={updateImages}
                                     className="form-control"
                                 />
                             </div>

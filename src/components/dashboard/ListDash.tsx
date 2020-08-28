@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../App';
-import { PropType } from '../helpers/types';
-import { getPropList } from '../helpers/crud.helpers';
+import { AppContext } from '../../App';
+import { PropType } from '../../helpers/types_variables';
+import { getPropList } from '../../helpers/crud.helpers';
 
 export default function List(): React.ReactElement {
     // Set the state and use properties in the state
@@ -40,6 +40,7 @@ export default function List(): React.ReactElement {
                                 src="https://i.imgur.com/wfDHjIS.jpg"
                                 alt="Card image"
                             />
+                            +{Number(property.images?.length) - 1} photos more
                             <div className="card-body">
                                 <p className="overflow-hidden card-text">{property.description}</p>
                             </div>
@@ -49,15 +50,15 @@ export default function List(): React.ReactElement {
                                 <li className="list-group-item">Vestibulum at eros</li>
                             </ul>
                             <div className="card-footer align-items-center align-self-stretch">
-                                <Link to={`/api/delete/${property._id}`} className="btn btn-danger">
+                                <Link to={`/dashboard/delete/${property._id}`} className="btn btn-danger">
                                     Delete
                                 </Link>
-                                <Link to={`/api/edit/${property._id}`} className="btn btn-secondary">
+                                <Link to={`/dashboard/edit/${property._id}`} className="btn btn-secondary">
                                     Edit
                                 </Link>
                             </div>
                             <div className="card-footer text-muted align-self-stretch">
-                                <b>2 days ago</b>
+                                <b>Created: {new Date(property.created_timestamp).toLocaleString('es-ES')}</b>
                             </div>
                         </div>
                     );

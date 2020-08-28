@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 /* import { AppContext } from '../App'; */
 import { useParams } from 'react-router-dom';
-import { PropType } from '../helpers/types';
-import { getPropSingle, crudEdit } from '../helpers/crud.helpers';
+import { PropType, propertyDefault } from '../../helpers/types_variables';
+import { getPropSingle, crudEdit } from '../../helpers/crud.helpers';
 
 export default function Edit(): React.ReactElement {
     // Set the state and use properties in the state
     /* const ctx = React.useContext(AppContext); */
     const { id } = useParams();
 
-    const [property, setProperty] = useState<PropType>({
-        _id: '',
-        ref: '',
-        title: '',
-        description: '',
-    });
+    const [property, setProperty] = useState<PropType>(propertyDefault);
 
     React.useEffect(() => {
         getPropSingle(id).then((p: PropType) => {
@@ -69,6 +64,14 @@ export default function Edit(): React.ReactElement {
                                     placeholder="Description..."
                                     className="form-control"
                                 />
+                                <div className="text-center">
+                                    {property.images?.map((i, key) => (
+                                        <div key={key}>{i}</div>
+                                    ))}
+                                </div>
+                                <div className="card-footer text-muted align-self-stretch">
+                                    {new Date(property.created_timestamp).toLocaleString('es-ES')}
+                                </div>
                             </div>
                             <button className="btn btn-success btn-block" type="submit">
                                 Edit
