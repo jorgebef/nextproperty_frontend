@@ -1,15 +1,17 @@
-import { PropType } from './types_variables';
-import { APIURL } from '../helpers/types_variables';
+import { PropType } from '../types';
+import { APIURL } from '../vars';
 
-export const crudCreate = (property: Record<string, any>, imgData: FileList | undefined): void => {
+export const crudCreate = (property: PropType, imgData?: FileList): void => {
     const fd = new FormData();
     Object.keys(property).forEach((key) => fd.append(key, property[key]));
     fd.set('images', JSON.stringify(property.images));
 
-    Array.prototype.forEach.call(imgData, (file) => {
-        fd.append('files', file);
-        console.log(file);
-    });
+    if (imgData) {
+        Array.prototype.forEach.call(imgData, (file) => {
+            fd.append('files', file);
+            console.log(file);
+        });
+    }
     // fd.append('files', imgData);
     fd.forEach((value, key) => {
         console.log(`key: ${key}, value:${value}`);
@@ -32,11 +34,31 @@ export const crudCreate = (property: Record<string, any>, imgData: FileList | un
         });
 };
 
-export const crudEdit = (property: PropType, id: string): void => {
+export const crudEdit = (property: PropType, id: string, imgData?: FileList, imgDel?: Array<string>): void => {
+    const fd = new FormData();
+    Object.keys(property).forEach((key) => fd.append(key, property[key]));
+    if (property.images) {
+        fd.set('images', JSON.stringify(property.images));
+    } else {
+        fd.delete('images');
+    }
+    if (imgDel) {
+        fd.append('imgDel', JSON.stringify(imgDel));
+    }
+    if (imgData) {
+        Array.prototype.forEach.call(imgData, (file) => {
+            fd.append('files', file);
+            console.log(file);
+        });
+    }
+    // fd.append('files', imgData);
+    fd.forEach((value, key) => {
+        console.log(`key: ${key}, value:${value}`);
+    });
     fetch(`${APIURL}/api/property/edit/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...property }),
+        // headers: { 'Content-Type': 'application/json' },
+        body: fd,
         credentials: 'include',
     })
         .then((res) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-export default function Unauthorized(): React.ReactElement {
+export function NotFound(): React.ReactElement {
     /* return ( */
     /*     <div className="container"> */
     /*         <div className="message"> */

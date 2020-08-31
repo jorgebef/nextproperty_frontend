@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Unauthorized(): React.ReactElement {
+export function Unauthorized(): React.ReactElement {
     return (
         <div className="container">
             <div className="message">

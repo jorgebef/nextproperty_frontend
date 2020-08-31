@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import List from './components/dashboard/ListDash';
-import NavBarDashboard from './components/dashboard/NavbarDash';
-import LogIn from './components/dashboard/LogIn';
-import Create from './components/dashboard/Create';
-import Edit from './components/dashboard/Edit';
-import Delete from './components/dashboard/Delete';
+import { List } from './Dashboard/List';
+import { NavBarDash } from './Dashboard/NavBar';
+import { LogIn } from './Dashboard/LogIn';
+import { Create } from './Dashboard/Create';
+import { Edit } from './Dashboard/Edit';
+import { Delete } from './Dashboard/Delete';
 
 import { ProtectedRoute, LoginRoute } from './routers/DashboardRoutes';
-import NotFound from './components/dashboard/NotFoundDash';
-import NavBarPublic from './components/public/NavbarPublic';
+import { NotFound } from './Dashboard/NotFound';
+import { NavBarFront } from './Frontend/NavBar';
 
 export const AppContext: React.Context<any> = React.createContext({});
 
-function App(): React.ReactElement {
+function App() {
     // Array<string | React.Dispatch<SetStateAction<string>>> is the type for the state hooks
     /* const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || ''); */
     /* const [tokenExpiry, setTokenExpiry] = useState(localStorage.getItem('tokenExpiry') || 0); */
@@ -36,7 +36,7 @@ function App(): React.ReactElement {
     return (
         <BrowserRouter>
             <AppContext.Provider value={ctx}>
-                {ctx.auth.get ? <NavBarDashboard /> : <NavBarPublic />}
+                {ctx.auth.get ? <NavBarDash /> : <NavBarFront />}
                 <Route path="/dashboard">
                     <Switch>
                         <LoginRoute path="/dashboard/login" exact component={LogIn} />

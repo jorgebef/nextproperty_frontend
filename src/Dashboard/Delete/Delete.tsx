@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 /* import { AppContext } from '../App'; */
 import { useParams } from 'react-router-dom';
-import { PropType, propertyDefault } from '../../helpers/types_variables';
-import { getPropSingle, crudDelete } from '../../helpers/crud.helpers';
+import { PropType, propertyDefault } from '../../SharedGlobal';
+import { getPropSingle, crudDelete } from '../../SharedGlobal/helperFuncs';
 
-export default function Delete(): React.ReactElement {
+export function Delete(): React.ReactElement {
     // Set the state and use properties in the state
     const { id } = useParams();
     /* const ctx = React.useContext(AppContext); */

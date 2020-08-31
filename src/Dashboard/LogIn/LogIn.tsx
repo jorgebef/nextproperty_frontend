@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { AppContext } from '../../App';
-import { signIn } from '../../helpers/auth.helpers';
+import { signIn } from '../../SharedGlobal/helperFuncs';
 import { Redirect } from 'react-router-dom';
-import './styles/login.css';
+import './LogIn.css';
 
-export default function LogIn(): React.ReactElement {
+export function LogIn(): React.ReactElement {
     // use the context from App parent component
     const ctx = React.useContext(AppContext);
 
@@ -75,36 +75,4 @@ export default function LogIn(): React.ReactElement {
             </form>
         </div>
     );
-
-    /* return ( */
-    /*     <div className="col-md-4 offset-md-4"> */
-    /*         <div className="card-body"> */
-    /*             <form onSubmit={handleSubmit} className="formgroup"> */
-    /*                 <div>Log In</div> */
-    /*                 <div className="form-group"> */
-    /*                     <input */
-    /*                         type="text" */
-    /*                         name="email" */
-    /*                         value={email} */
-    /*                         onChange={(e) => setEmail(e.target.value)} */
-    /*                         placeholder="email" */
-    /*                         className="form-control" */
-    /*                         autoFocus */
-    /*                     /> */
-    /*                     <input */
-    /*                         type="password" */
-    /*                         name="password" */
-    /*                         value={password} */
-    /*                         onChange={(e) => setPassword(e.target.value)} */
-    /*                         placeholder="password" */
-    /*                         className="form-control" */
-    /*                     /> */
-    /*                 </div> */
-    /*                 <button className="btn btn-success btn-block" disabled={!password || !email} type="submit"> */
-    /*                     {loading ? 'Logging in...' : 'Log In'} */
-    /*                 </button> */
-    /*             </form> */
-    /*         </div> */
-    /*     </div> */
-    /* ); */
 }

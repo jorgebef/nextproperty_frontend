@@ -1,5 +1,5 @@
 import React from 'react';
-import { APIURL } from '../helpers/types_variables';
+import { APIURL } from '../vars';
 
 // FIRST RENDER OF LIST COMPONENT REDIRECTS TO UNAUTHORIZED
 // ctx.auth.get is not updated immediately

@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppContext } from '../App';
-import Unauthorized from '../components/Unauthorized';
+import { Unauthorized } from '../SharedGlobal/Unauthorized';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuth } from '../helpers/auth.helpers';
+import { isAuth } from '../SharedGlobal/helperFuncs';
 
 export function LoginRoute({ component: Component, ...rest }: any): any {
     const ctx = React.useContext(AppContext);

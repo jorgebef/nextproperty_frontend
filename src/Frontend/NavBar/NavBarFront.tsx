@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import { AppContext } from '../../App';
 import { Link } from 'react-router-dom';
-import { signOut } from '../../helpers/auth.helpers';
+import { signOut } from '../../SharedGlobal/helperFuncs';
 /* import axios from 'axios'; */
 
-export default function NavBarDashboard(): React.ReactElement {
+export function NavBarFront(): React.ReactElement {
     const ctx = React.useContext(AppContext);
 
     let button: ReactElement;

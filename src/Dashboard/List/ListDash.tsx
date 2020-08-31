@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
-import { PropType } from '../../helpers/types_variables';
-import { getPropList } from '../../helpers/crud.helpers';
+import { getPropList } from '../../SharedGlobal/helperFuncs';
+import { PropType } from '../../SharedGlobal';
 
-export default function List(): React.ReactElement {
+export function List(): React.ReactElement {
     // Set the state and use properties in the state
     const ctx = React.useContext(AppContext);
 
     React.useEffect(() => {
         getPropList(ctx);
-    }, []);
+    }, [List]);
 
     return (
         <div className="container-fluid">
