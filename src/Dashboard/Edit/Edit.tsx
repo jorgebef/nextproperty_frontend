@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 /* import { AppContext } from '../App'; */
 import { useParams } from 'react-router-dom';
-import { PropType, propertyDefault } from '../../SharedGlobal';
+import { PropType, propertyDefault, APIURL } from '../../SharedGlobal';
 import { getPropSingle, crudEdit } from '../../SharedGlobal/helperFuncs';
 import { ImageSelector } from '../Shared';
-
-import './Edit.css';
+import { Loading } from '../Shared/Loading';
 
 export function Edit(): React.ReactElement {
     // Set the state and use properties in the state
@@ -53,10 +52,15 @@ export function Edit(): React.ReactElement {
             images: propImgArray,
             edited_timestamp: Date.now(),
         });
-        setOldTimestamp(property.edited_timestamp ? property.edited_timestamp : Number(0));
+        // I have no idea why but 0 is NOT liked as a number value, better use 1
+        setOldTimestamp(property.edited_timestamp ? property.edited_timestamp : 1);
     };
 
     useEffect(() => {
+        if (oldTimestamp) {
+            console.log('current db edit tmpstamp: ' + property.edited_timestamp);
+            console.log('oldTimestamp: ' + oldTimestamp);
+        }
         if (property.edited_timestamp && oldTimestamp && property.edited_timestamp > oldTimestamp) {
             crudEdit(property, id, imgData, imgDel);
         }
@@ -96,6 +100,7 @@ export function Edit(): React.ReactElement {
 
     return (
         <div className="row">
+            {loading ? <Loading /> : ''}
             <div className="col-md-4 offset-md-4">
                 <div className="card">
                     <div className="card-body">
@@ -179,6 +184,11 @@ export function Edit(): React.ReactElement {
                                     {property.images?.concat(imgAdd ? imgAdd : []).map((i, key) => (
                                         <div key={key}>
                                             <label>
+                                                <img
+                                                    style={{ width: '90px' }}
+                                                    alt={i}
+                                                    src={`${APIURL}/${property.ref}/${i}`}
+                                                />
                                                 <input type="checkbox" name={i} onClick={updateDelete} />
                                                 {i}
                                             </label>
@@ -190,15 +200,7 @@ export function Edit(): React.ReactElement {
                                 </div>
                             </div>
                             <button className="btn btn-success btn-block" type="submit" disabled={loading}>
-                                {!loading ? (
-                                    <div className="modal">
-                                        <div className="modal-center">
-                                            <div>KEKalksdjlfkjaldkfjlajdflksdWWWWW</div>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    'Edit'
-                                )}
+                                {loading ? 'Loading...' : 'Edit'}
                             </button>
                         </form>
                     </div>

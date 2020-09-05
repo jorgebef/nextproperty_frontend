@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppContext } from '../../App';
 import { signIn } from '../../SharedGlobal/helperFuncs';
 import { Redirect } from 'react-router-dom';
-import './LogIn.css';
+import './style.css';
 
 export function LogIn(): React.ReactElement {
     // use the context from App parent component

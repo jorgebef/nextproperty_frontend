@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
 import { getPropList } from '../../SharedGlobal/helperFuncs';
-import { PropType } from '../../SharedGlobal';
+import { PropType, APIURL } from '../../SharedGlobal';
 
 export function List(): React.ReactElement {
     // Set the state and use properties in the state
@@ -37,10 +37,18 @@ export function List(): React.ReactElement {
                             </div>
                             <img
                                 style={{ objectFit: 'cover', width: '100%', display: 'block' }}
-                                src="https://i.imgur.com/wfDHjIS.jpg"
-                                alt="Card image"
+                                src={
+                                    property.images && property.images[0]
+                                        ? `${APIURL}/${property.ref}/${property.images[0]}`
+                                        : 'https://i.imgur.com/2idW9C3.jpg'
+                                }
+                                alt={
+                                    property.images && property.images[0]
+                                        ? `${APIURL}/${property.ref}/${property.images[0]}`
+                                        : 'https://i.imgur.com/2idW9C3.jpg'
+                                }
                             />
-                            +{Number(property.images?.length) - 1} photos more
+                            {Number(property.images?.length)} photos
                             <div className="card-body">
                                 <p className="overflow-hidden card-text">{property.description}</p>
                             </div>

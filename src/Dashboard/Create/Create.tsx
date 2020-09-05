@@ -3,12 +3,14 @@ import { AppContext } from '../../App';
 import { PropType, propertyDefault } from '../../SharedGlobal';
 import { crudCreate, getPropList } from '../../SharedGlobal/helperFuncs';
 import { ImageSelector } from '../Shared';
+import { Loading } from '../Shared/Loading';
 
 export function Create(): React.ReactElement {
     // Set the state and use properties in the state
     const [property, setProperty] = useState<PropType>(propertyDefault);
     const [imgData, setImgData] = useState<FileList>();
     const [imgAdd, setImgAdd] = useState<Array<string>>();
+    const [loading, setLoading] = useState(false);
 
     const ctx = React.useContext(AppContext);
 
@@ -18,6 +20,7 @@ export function Create(): React.ReactElement {
 
     const handleCreate = (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         /* alert(property.created_timestamp.toLocaleString('en-GB')); */
         setProperty({
             ...property,
@@ -52,6 +55,7 @@ export function Create(): React.ReactElement {
 
     return (
         <div className="row">
+            {loading ? <Loading /> : ''}
             <div className="col-md-4 offset-md-4">
                 <div className="card">
                     <div className="card-body">
@@ -136,7 +140,7 @@ export function Create(): React.ReactElement {
                                 />
                             </div>
                             <button className="btn btn-success btn-block" type="submit">
-                                Create
+                                {loading ? 'Loading...' : 'Create'}
                             </button>
                         </form>
                     </div>

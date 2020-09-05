@@ -19,7 +19,7 @@ export const isAuth = (ctx: React.ComponentState): void => {
                 console.log('Token not verified');
             }
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
 };
 
 export const signIn = async (ctx: React.ComponentState, email: string, password: string): Promise<void> => {
@@ -40,7 +40,7 @@ export const signIn = async (ctx: React.ComponentState, email: string, password:
             //     console.log('TOKEN SET!!!!!!!!!!!!!!');
             // })
             .catch((error) => {
-                alert(error);
+                console.log(error);
                 reject();
             });
     });
@@ -65,6 +65,6 @@ export const signOut = (ctx: React.ComponentState): undefined | void => {
                 console.log('Token not verified');
             }
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     localStorage.clear();
 };
