@@ -1,7 +1,7 @@
 import { PropType } from '../types';
 import { APIURL } from '../vars';
 
-export const crudCreate = (property: PropType, imgData?: FileList): void => {
+export const crudCreate = async (property: PropType, imgData?: FileList): Promise<boolean> => {
     const fd = new FormData();
     Object.keys(property).forEach((key) => fd.append(key, property[key]));
     fd.set('images', JSON.stringify(property.images));
@@ -17,24 +17,28 @@ export const crudCreate = (property: PropType, imgData?: FileList): void => {
         console.log(`key: ${key}, value:${value}`);
     });
 
-    fetch(`${APIURL}/api/property/create`, {
+    const kekw = await fetch(`${APIURL}/api/property/create`, {
         method: 'POST',
-        headers: {
-            //     /* no need in multipart/form-data */
-        },
+        // headers: {},
         body: fd,
         credentials: 'include',
     })
         .then((res) => {
-            res.json();
-            window.location.href = '/dashboard/list';
+            return res.ok ? true : false;
         })
         .catch((err) => {
             console.log(err);
+            return false;
         });
+    return kekw;
 };
 
-export const crudEdit = (property: PropType, id: string, imgData?: FileList, imgDel?: Array<string>): void => {
+export const crudEdit = async (
+    property: PropType,
+    id: string,
+    imgData?: FileList,
+    imgDel?: Array<string>
+): Promise<boolean> => {
     const fd = new FormData();
     Object.keys(property).forEach((key) => fd.append(key, property[key]));
     if (property.images) {
@@ -51,38 +55,40 @@ export const crudEdit = (property: PropType, id: string, imgData?: FileList, img
             console.log(file);
         });
     }
-    // fd.append('files', imgData);
-    fd.forEach((value, key) => {
-        console.log(`key: ${key}, value:${value}`);
-    });
-    fetch(`${APIURL}/api/property/edit/${id}`, {
+    const kekw = await fetch(`${APIURL}/api/property/edit/${id}`, {
         method: 'PUT',
         // headers: { 'Content-Type': 'application/json' },
         body: fd,
         credentials: 'include',
     })
         .then((res) => {
-            res.json();
-            window.location.href = '/dashboard/list';
+            return res.ok ? true : false;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            console.log(error);
+            return false;
+        });
+    return kekw;
 };
 
-export const crudDelete = (id: string): void => {
-    fetch(`${APIURL}/api/property/delete/${id}`, {
+export const crudDelete = async (id: string): Promise<boolean> => {
+    const kekw = await fetch(`${APIURL}/api/property/delete/${id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
     })
         .then((res) => {
-            res.json();
-            window.location.href = '/dashboard/list';
+            return res.ok ? true : false;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            console.log(error);
+            return false;
+        });
+    return kekw;
 };
 
-export const getPropList = (ctx: React.ComponentState): void => {
-    fetch(`${APIURL}/api/property/list`, {
+export const getPropList = async (ctx: React.ComponentState): Promise<void> => {
+    await fetch(`${APIURL}/api/property/list`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

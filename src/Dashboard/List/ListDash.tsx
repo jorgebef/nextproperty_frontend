@@ -4,39 +4,31 @@ import { AppContext } from '../../App';
 import { getPropList } from '../../SharedGlobal/helperFuncs';
 import { PropType, APIURL } from '../../SharedGlobal';
 
-export function List(): React.ReactElement {
+import style from '../Shared/styleDash.module.css';
+
+export const ListDash = (): React.ReactElement => {
     // Set the state and use properties in the state
     const ctx = React.useContext(AppContext);
 
     React.useEffect(() => {
         getPropList(ctx);
-    }, [List]);
+    }, [ListDash]);
 
     return (
-        <div className="container-fluid">
-            <div className="row justify-content-center p-4">
-                <form className="form-inline align-items-center justify-content-center p-xl-3">
+        <div className={style.container}>
+            <div className="row justify-content-center mb-5">
+                <form className="form-inline align-items-center justify-content-center">
                     <input className="form-control mr-sm-2" type="text" placeholder="Search"></input>
                     <button className="btn btn-secondary" type="submit">
                         Search
                     </button>
                 </form>
             </div>
-
-            <div className="row justify-content-center pl-xl-5 pr-xl-5">
+            <div className={style.grid}>
                 {ctx.propList.get.map((property: PropType, key: number | string) => {
                     return (
-                        <div
-                            key={key + property._id}
-                            className="col-sm-3 card bg-light p-0 m-3 text-center align-items-center"
-                        >
-                            <h3 className="card-header align-self-stretch">{property.ref}</h3>
-                            <div className="card-body">
-                                <h5 className="card-title">{property.title}</h5>
-                                <h6 className="card-subtitle text-muted">Support card subtitle</h6>
-                            </div>
+                        <div key={key + property._id} className={style.propCell}>
                             <img
-                                style={{ objectFit: 'cover', width: '100%', display: 'block' }}
                                 src={
                                     property.images && property.images[0]
                                         ? `${APIURL}/${property.ref}/${property.images[0]}`
@@ -48,25 +40,28 @@ export function List(): React.ReactElement {
                                         : 'https://i.imgur.com/2idW9C3.jpg'
                                 }
                             />
+                            <div className={style.propPrice}>{property.price.toLocaleString()} €</div>
+                            <h1 className={style.propTitle}>{property.title}</h1>
+                            {/* <div className="card-subtitle text-muted">Support card subtitle</div> */}
                             {Number(property.images?.length)} photos
-                            <div className="card-body">
-                                <p className="overflow-hidden card-text">{property.description}</p>
-                            </div>
-                            <ul className="list-group list-group-flush align-self-stretch align-items-center">
-                                <li className="list-group-item">Cras alskdjflakjdslfk adofj aoskjusto</li>
-                                <li className="list-group-item">Dapibus ac facilisis in</li>
-                                <li className="list-group-item">Vestibulum at eros</li>
+                            <div className={style.propDesc}>{property.description}</div>
+                            <ul className={style.propStats}>
+                                <li className="align-self-stretch list-group-item">
+                                    Cras alskdjflakjdslfk adofj aoskjusto
+                                </li>
+                                <li className="align-self-stretch list-group-item">Dapibus ac facilisis in</li>
+                                <li className="align-self-stretch list-group-item">Vestibulum at eros</li>
                             </ul>
-                            <div className="card-footer align-items-center align-self-stretch">
-                                <Link to={`/dashboard/delete/${property._id}`} className="btn btn-danger">
+                            <div className={style.actionButtons}>
+                                <Link to={`/dashboard/delete/${property._id}`} className={style.btnRed}>
                                     Delete
                                 </Link>
-                                <Link to={`/dashboard/edit/${property._id}`} className="btn btn-secondary">
+                                <Link to={`/dashboard/edit/${property._id}`} className={style.btnBlue}>
                                     Edit
                                 </Link>
                             </div>
-                            <div className="card-footer text-muted align-self-stretch">
-                                <b>Created: {new Date(property.created_timestamp).toLocaleString('es-ES')}</b>
+                            <div className={style.propFooter}>
+                                Created: {new Date(property.created_timestamp).toLocaleString('es-ES')}
                             </div>
                         </div>
                     );
@@ -74,4 +69,4 @@ export function List(): React.ReactElement {
             </div>
         </div>
     );
-}
+};

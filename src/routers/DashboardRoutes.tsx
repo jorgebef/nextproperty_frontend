@@ -1,6 +1,5 @@
 import React from 'react';
 import { AppContext } from '../App';
-import { Unauthorized } from '../SharedGlobal/Unauthorized';
 import { Route, Redirect } from 'react-router-dom';
 import { isAuth } from '../SharedGlobal/helperFuncs';
 

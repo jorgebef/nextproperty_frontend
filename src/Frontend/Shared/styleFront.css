@@ -1,0 +1,121 @@
+#frontPageContainer {
+    padding: 100px 0 100px 0;
+}
+
+.pack {
+    /* display: block; */
+    height: auto;
+}
+
+.pack .image {
+    display: block;
+    margin-top: -250px;
+    width: 100%;
+    height: auto;
+    z-index: -999;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.pack .overlay {
+    position: relative;
+    bottom: 450px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: 0.5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.pack:hover .overlay {
+    opacity: 1;
+}
+
+.pack .arrowContainer {
+    position: relative;
+    bottom: 360px;
+    width: 100%;
+}
+
+.arrowContainer .arrows {
+    width: 60px;
+    display: block;
+    margin: auto;
+}
+
+.arrows path {
+    stroke: #fff;
+    fill: transparent;
+    stroke-width: 4px;
+    animation: arrow 2s infinite;
+    -webkit-animation: arrow 2s infinite;
+}
+
+@keyframes arrow {
+    0% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/ {
+    0% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.arrows path.a1 {
+    animation-delay: -1s;
+    -webkit-animation-delay: -1s; /* Safari 和 Chrome */
+}
+
+.arrows path.a2 {
+    animation-delay: -0.5s;
+    -webkit-animation-delay: -0.5s; /* Safari 和 Chrome */
+}
+
+.arrows path.a3 {
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s; /* Safari 和 Chrome */
+}
+
+#features {
+    background-color: rgba(240, 240, 240, 1);
+    align-items: center;
+    text-align: center;
+}
+
+.roundIcon {
+    margin: auto;
+    padding: 10px;
+    font-size: 38px;
+    transition: all 0.5s;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #6372ff 0%, #5ca9fb 100%);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+}

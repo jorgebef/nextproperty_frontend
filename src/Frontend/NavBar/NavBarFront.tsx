@@ -1,52 +1,38 @@
-import React, { ReactElement } from 'react';
-import { AppContext } from '../../App';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { signOut } from '../../SharedGlobal/helperFuncs';
-/* import axios from 'axios'; */
 
 export function NavBarFront(): React.ReactElement {
-    const ctx = React.useContext(AppContext);
-
-    let button: ReactElement;
-
-    const logOutEventHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-        e.preventDefault();
-        signOut(ctx);
-    };
-
-    if (!ctx.auth.get) {
-        button = (
-            <Link to="/dashboard/login" className="btn btn-success">
-                Sign In
-            </Link>
-        );
-    } else {
-        button = (
-            <button onClick={logOutEventHandler} className="btn btn-danger">
-                Sign Out
-            </button>
-        );
-    }
-
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-xl-2">
-            <a href={window.location.href} className="navbar-brand mr-5">
-                NextProperty Panel
-            </a>
-            <div className="collapse navbar-collapse" id="navbarColor02">
-                <ul className="navbar-nav mr-auto">
-                    <li className="active">
-                        <Link className="nav-link" to="/dashboard/create">
-                            Create
+        <nav
+            className="navbar navbar-expand-sm navbar-dark bg-dark"
+            style={{ zIndex: 100, position: 'fixed', top: '0px', width: '100%' }}
+        >
+            <div className="container">
+                <a href="http://localhost:3000/" className="navbar-brand">
+                    NextProperty
+                </a>
+                <ul className="nav navbar-nav m-auto">
+                    <li className="active mx-3">
+                        <Link className="nav-link" to="/">
+                            Home
                         </Link>
                     </li>
-                    <li className="active">
-                        <Link className="nav-link" to="/dashboard/list">
-                            List
+                    <li className="active mx-3">
+                        <Link className="nav-link" to="/properties">
+                            Properties
+                        </Link>
+                    </li>
+                    <li className="active mx-3">
+                        <Link className="nav-link" to="/about">
+                            About
+                        </Link>
+                    </li>
+                    <li className="active mx-3">
+                        <Link className="nav-link" to="/contact">
+                            Contact
                         </Link>
                     </li>
                 </ul>
-                {button}
             </div>
         </nav>
     );

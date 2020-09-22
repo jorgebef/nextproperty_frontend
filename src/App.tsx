@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+/* import 'bootstrap/dist/css/bootstrap.min.css'; */
+import './main.css';
 
-import { List } from './Dashboard/List';
+import { ListDash } from './Dashboard/List';
 import { NavBarDash } from './Dashboard/NavBar';
-import { LogIn } from './Dashboard/LogIn';
-import { Create } from './Dashboard/Create';
-import { Edit } from './Dashboard/Edit';
-import { Delete } from './Dashboard/Delete';
+import { LogInDash } from './Dashboard/LogIn';
+import { CreateProperty } from './Dashboard/Create';
+import { EditProperty } from './Dashboard/Edit';
+import { DeleteProperty } from './Dashboard/Delete';
 
 import { ProtectedRoute, LoginRoute } from './routers/DashboardRoutes';
 import { NotFound } from './Dashboard/NotFound';
 import { NavBarFront } from './Frontend/NavBar';
+import { HomePage } from './Frontend/Home/HomePage';
+import { PropertiesPage } from './Frontend/Properties/PropertiesPage';
 
 export const AppContext: React.Context<any> = React.createContext({});
 
-function App() {
+function App(): React.ReactElement {
     // Array<string | React.Dispatch<SetStateAction<string>>> is the type for the state hooks
     /* const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || ''); */
     /* const [tokenExpiry, setTokenExpiry] = useState(localStorage.getItem('tokenExpiry') || 0); */
@@ -29,21 +32,25 @@ function App() {
         auth: { get: auth, set: setAuth },
     };
 
-    /* useEffect(() => { */
-    /*     isAuth(ctx); */
-    /* }, [auth]); */
-
+    const isDash = String(window.location).search('/dashboard') === -1 ? false : true;
     return (
         <BrowserRouter>
             <AppContext.Provider value={ctx}>
-                {ctx.auth.get ? <NavBarDash /> : <NavBarFront />}
+                {isDash ? <NavBarDash /> : <NavBarFront />}
+                <Route path="/">
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/properties" component={PropertiesPage} />
+                        {/* <Redirect to="/" /> {/1* THIS IS SET TO REDIRECT TO LOGIN]*1/}*/}
+                    </Switch>
+                </Route>
                 <Route path="/dashboard">
                     <Switch>
-                        <LoginRoute path="/dashboard/login" exact component={LogIn} />
-                        <ProtectedRoute path="/dashboard/create" exact component={Create} />
-                        <ProtectedRoute path="/dashboard/list" exact component={List} />
-                        <ProtectedRoute path="/dashboard/edit/:id" component={Edit} />
-                        <ProtectedRoute path="/dashboard/delete/:id" component={Delete} />
+                        <LoginRoute exact path="/dashboard/login" component={LogInDash} />
+                        <ProtectedRoute exact path="/dashboard/create" component={CreateProperty} />
+                        <ProtectedRoute exact path="/dashboard/list" component={ListDash} />
+                        <ProtectedRoute exact path="/dashboard/edit/:id" component={EditProperty} />
+                        <ProtectedRoute exact path="/dashboard/delete/:id" component={DeleteProperty} />
                         <Route component={NotFound} /> {/* THIS IS SET TO REDIRECT TO LOGIN]*/}
                     </Switch>
                 </Route>

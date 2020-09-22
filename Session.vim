@@ -7,17 +7,21 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +42 src/App.tsx
-badd +69 src/Dashboard/Edit/Edit.tsx
-badd +2 src/Dashboard/Shared/Loading/Loading.tsx
-badd +23 src/Dashboard/Create/Create.tsx
-badd +63 src/SharedGlobal/helperFuncs/crud.helpers.ts
-badd +1 src/SharedGlobal/vars.ts
-badd +5 src/SharedGlobal/types.ts
-badd +59 src/Dashboard/List/ListDash.tsx
+badd +66 src/SharedGlobal/helperFuncs/crud.helpers.ts
+badd +75 src/Dashboard/Shared/MapSelector/MapSelector.tsx
+badd +6 src/Frontend/NavBar/NavBarFront.tsx
+badd +6 src/Frontend/Home/HomePage.tsx
+badd +161 src/Dashboard/Create/CreateProperty.tsx
+badd +27 src/Dashboard/List/ListDash.tsx
+badd +38 src/Dashboard/Shared/ImageSelector/ImageSelector.tsx
+badd +60 src/Dashboard/LogIn/LogInDash.tsx
+badd +105 src/Dashboard/Shared/styleDash.module.css
+badd +186 src/Dashboard/Edit/EditProperty.tsx
+badd +28 src/Dashboard/Delete/DeleteProperty.tsx
+badd +36 src/Dashboard/NavBar/NavBarDash.tsx
 argglobal
 %argdel
-edit src/Dashboard/Shared/Loading/Loading.tsx
+edit src/Dashboard/NavBar/NavBarDash.tsx
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -31,24 +35,24 @@ set winminwidth=0
 set winwidth=1
 wincmd =
 argglobal
-let s:l = 2 - ((1 * winheight(0) + 33) / 66)
+let s:l = 30 - ((1 * winheight(0) + 33) / 66)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2
-normal! 018|
+30
+normal! 010|
 wincmd w
 argglobal
-if bufexists("src/Dashboard/Edit/Edit.tsx") | buffer src/Dashboard/Edit/Edit.tsx | else | edit src/Dashboard/Edit/Edit.tsx | endif
+if bufexists("src/Dashboard/Shared/styleDash.module.css") | buffer src/Dashboard/Shared/styleDash.module.css | else | edit src/Dashboard/Shared/styleDash.module.css | endif
 if &buftype ==# 'terminal'
-  silent file src/Dashboard/Edit/Edit.tsx
+  silent file src/Dashboard/Shared/styleDash.module.css
 endif
-let s:l = 69 - ((32 * winheight(0) + 33) / 66)
+let s:l = 75 - ((38 * winheight(0) + 33) / 66)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-69
-normal! 051|
+75
+normal! 043|
 wincmd w
 wincmd =
 tabnext 1

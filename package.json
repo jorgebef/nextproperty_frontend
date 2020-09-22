@@ -7,13 +7,12 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.2",
-    "google-maps-react": "^2.0.6",
+    "google-map-react": "^2.1.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "serialize-javascript": "^4.0.0",
-    "typescript": "^3.9.7"
+    "serialize-javascript": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,14 +36,15 @@
     ]
   },
   "devDependencies": {
-    "@types/google-maps-react": "^2.0.5",
+    "@types/google-map-react": "^1.1.8",
     "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.55",
+    "@types/node": "^12.12.62",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
-    "eslint-plugin-react": "^7.20.6"
+    "eslint-plugin-react": "^7.20.6",
+    "typescript": "^3.9.7"
   }
 }
