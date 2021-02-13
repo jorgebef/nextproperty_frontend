@@ -95,8 +95,8 @@ export const crudDelete = async (ctx: React.ComponentState, id: string): Promise
 export const getPropList = async (ctx: React.ComponentState): Promise<void> => {
     await fetch(`${APIURL}/api/property/list`, {
         method: 'GET',
-        // headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + ctx.jwtToken.get},
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + ctx.jwtToken.get},
+        // headers: {'Content-Type': 'application/json'},
         credentials: 'include',
     })
         .then((res) => res.json())

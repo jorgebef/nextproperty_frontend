@@ -10,7 +10,7 @@ export const isAuth = async (ctx: React.ComponentState): Promise<boolean> => {
     const fetchRes = fetch(`${APIURL}/api/auth`, {
         method: 'GET',
         headers: {
-            // Authorization: 'Bearer ' + ctx.jwtToken.get,
+            Authorization: 'Bearer ' + ctx.jwtToken.get,
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
