@@ -12,9 +12,10 @@ badd +32 src/App.tsx
 badd +38 src/Dashboard/LogIn/LogInDash.tsx
 badd +42 src/routers/DashboardRoutes.tsx
 badd +50 src/Shared/Helpers/auth.helpers.ts
-badd +5 src/Shared/Helpers/vars.ts
+badd +7 src/Shared/Helpers/vars.ts
 badd +2 src/Dashboard/Create/CreateProperty.tsx
 badd +76 src/Shared/NavBar/NavBarDash.tsx
+badd +18 package.json
 argglobal
 %argdel
 edit src/Shared/Helpers/auth.helpers.ts
@@ -45,11 +46,11 @@ if bufexists("src/Shared/Helpers/vars.ts") | buffer src/Shared/Helpers/vars.ts |
 if &buftype ==# 'terminal'
   silent file src/Shared/Helpers/vars.ts
 endif
-let s:l = 7 - ((6 * winheight(0) + 28) / 57)
+let s:l = 1 - ((0 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
+1
 normal! 0
 wincmd w
 2wincmd w
