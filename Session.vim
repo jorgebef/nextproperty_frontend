@@ -15,7 +15,8 @@ badd +65 src/Shared/Helpers/auth.helpers.ts
 badd +7 src/Shared/Helpers/vars.ts
 badd +2 src/Dashboard/Create/CreateProperty.tsx
 badd +76 src/Shared/NavBar/NavBarDash.tsx
-badd +0 package.json
+badd +37 package.json
+badd +1 .gitignore
 argglobal
 %argdel
 edit src/App.tsx
