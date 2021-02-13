@@ -2,17 +2,19 @@ import React from 'react';
 // import {useCookies, Cookies} from "react-cookie";
 import {APIURL} from './vars';
 import Cookies from "js-cookie";
+import axios from 'axios'
 
 // FIRST RENDER OF LIST COMPONENT REDIRECTS TO UNAUTHORIZED
 // ctx.auth.get is not updated immediately
 export const isAuth = async (ctx: React.ComponentState): Promise<boolean> => {
     const fetchRes = fetch(`${APIURL}/api/auth`, {
         method: 'GET',
-        credentials: 'include',
         headers: {
-            Authorization: 'Bearer ' + ctx.jwtToken.get,
+            // Authorization: 'Bearer ' + ctx.jwtToken.get,
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
         },
+        credentials: 'include',
     })
         .then((res) => {
             res.json();
@@ -34,20 +36,33 @@ export const isAuth = async (ctx: React.ComponentState): Promise<boolean> => {
 };
 
 export const signIn = async (ctx: React.ComponentState, email: string, password: string): Promise<void> => {
+
+    // return axios({method: 'POST', data: {email, password}, url: `${APIURL}/api/login`, withCredentials: true})
+    //     .then((res) => {
+    //         console.log(res)
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //     })
+
     return await fetch(`${APIURL}/api/login`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email, password}),
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json',
+        },
         credentials: 'include',
+        body: JSON.stringify({email, password}),
     })
         .then((response) => {
             response.json().then((res) => {
+                console.log(res)
                 if (response.status === 200) {
                     console.log('response was OK');
                     // console.log(res.token);
                     localStorage.setItem('jwtToken', res.token);
-                    console.log('this is the reponse cookie ' + res.token)
-                    Cookies.set('token', res.token, {expires: 2, domain: '185.110.79.20'})
+                    console.log('this is the response token: ' + res.token)
+                    // Cookies.set('token', res.token, {expires: 2, domain: 'localhost'})
                     // ctx.cookies.set('token', res.token)
                     ctx.jwtToken.set(res.token);
                     ctx.auth.set(true);
@@ -59,6 +74,7 @@ export const signIn = async (ctx: React.ComponentState, email: string, password:
         .catch((error) => {
             console.log(error);
         });
+
 };
 
 export const signOut = (ctx: React.ComponentState): boolean => {

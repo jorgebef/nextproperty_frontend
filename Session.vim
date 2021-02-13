@@ -8,17 +8,17 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +32 src/App.tsx
+badd +1 src/App.tsx
 badd +38 src/Dashboard/LogIn/LogInDash.tsx
 badd +42 src/routers/DashboardRoutes.tsx
-badd +50 src/Shared/Helpers/auth.helpers.ts
+badd +65 src/Shared/Helpers/auth.helpers.ts
 badd +7 src/Shared/Helpers/vars.ts
 badd +2 src/Dashboard/Create/CreateProperty.tsx
 badd +76 src/Shared/NavBar/NavBarDash.tsx
-badd +1 package.json
+badd +0 package.json
 argglobal
 %argdel
-edit src/Shared/Helpers/auth.helpers.ts
+edit src/App.tsx
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -34,12 +34,12 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
 exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
 argglobal
-let s:l = 49 - ((35 * winheight(0) + 28) / 57)
+let s:l = 10 - ((9 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-49
-normal! 065|
+10
+normal! 0
 wincmd w
 argglobal
 if bufexists("package.json") | buffer package.json | else | edit package.json | endif
