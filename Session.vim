@@ -16,7 +16,6 @@ badd +7 src/Shared/Helpers/vars.ts
 badd +2 src/Dashboard/Create/CreateProperty.tsx
 badd +76 src/Shared/NavBar/NavBarDash.tsx
 badd +37 package.json
-badd +1 .gitignore
 argglobal
 %argdel
 edit src/App.tsx
@@ -32,8 +31,7 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
-exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
+wincmd =
 argglobal
 let s:l = 10 - ((9 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
@@ -47,16 +45,15 @@ if bufexists("package.json") | buffer package.json | else | edit package.json | 
 if &buftype ==# 'terminal'
   silent file package.json
 endif
-let s:l = 1 - ((0 * winheight(0) + 28) / 57)
+let s:l = 37 - ((36 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+37
+normal! 028|
 wincmd w
 2wincmd w
-exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
-exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
