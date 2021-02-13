@@ -62,7 +62,7 @@ export const signIn = async (ctx: React.ComponentState, email: string, password:
                     // console.log(res.token);
                     localStorage.setItem('jwtToken', res.token);
                     console.log('this is the response token: ' + res.token)
-                    Cookies.set('token', res.token, {expires: 2, domain: 'http://nextproperty-client.herokuapp.com'})
+                    // Cookies.set('token', res.token, {expires: 2, domain: 'http://nextproperty-client.herokuapp.com'})
                     // ctx.cookies.set('token', res.token)
                     ctx.jwtToken.set(res.token);
                     ctx.auth.set(true);
