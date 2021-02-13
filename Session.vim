@@ -15,7 +15,6 @@ badd +65 src/Shared/Helpers/auth.helpers.ts
 badd +7 src/Shared/Helpers/vars.ts
 badd +2 src/Dashboard/Create/CreateProperty.tsx
 badd +76 src/Shared/NavBar/NavBarDash.tsx
-badd +4 src/Shared/MapSelector/MapSelComp.tsx
 argglobal
 %argdel
 edit src/App.tsx
@@ -34,11 +33,11 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
 exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
 argglobal
-let s:l = 1 - ((0 * winheight(0) + 28) / 57)
+let s:l = 52 - ((51 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+52
 normal! 0
 wincmd w
 argglobal
@@ -53,6 +52,7 @@ normal! zt
 65
 normal! 0
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
 exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
 if exists(':tcd') == 2 | tcd ~/Documents/Github/Nextproperty-website/client | endif
