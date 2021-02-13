@@ -1,0 +1,31 @@
+:root {
+    font-size: 16px;
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    /* --button-radius: 0.25rem; */
+    --button-radius: 0rem;
+    --button-padding: 9px 20px;
+
+    /* --card-radius: 0.35rem; */
+    --card-radius: 0rem;
+    --card-shadow: 1px 1px 7px rgba(0, 0, 0, 0.05);
+    --login-shadow: 0px 4px 9px rgba(0, 0, 0, 0.15);
+    --navbar-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+    --border-width: 1.5px;
+
+    --text-primary: #fff;
+    --text-secondary: #2f2f2f;
+
+    --bgLight: #e7e7e7;
+    --bgMid: #d8d8d8;
+    --bg-dark: #6f6f6f;
+    --border-grey: #dfdfdf;
+    --dark-grey: #2f2f2f;
+    --red: #de2f35;
+    --blue: #2290cf;
+    --nextBlue: #002349;
+    --nextRed: #c43828;
+
+    --transitionDuration: 300ms;
+}

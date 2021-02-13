@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { AppContext } from '../../App';
-import { signIn } from '../../SharedGlobal/helperFuncs';
+import { signIn } from '../../Shared/Helpers';
 import { Redirect } from 'react-router-dom';
+import { Loading } from '../../Shared/Loading';
 
-import style from '../Shared/styleDash.module.css';
+import compStyle from './style.module.css';
+import generalStyle from '../../Shared/Styles/general.module.css';
+const style = { ...compStyle, ...generalStyle };
 
 export function LogInDash(): React.ReactElement {
     // use the context from App parent component
@@ -15,14 +18,17 @@ export function LogInDash(): React.ReactElement {
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
+    // console.log(ctx.jwtToken.get);
+
     const handleSubmit = async (evt: React.FormEvent) => {
         evt.preventDefault();
         setSubmitted(true);
         setLoading(true);
         if (email && password) {
-            await signIn(ctx, email, password).then();
-            setLoading(false);
-            return <Redirect to="/dashboard/list" />;
+            signIn(ctx, email, password).then(() => {
+                setLoading(false);
+                return <Redirect to="/dashboard/list" />;
+            });
         } else {
             setLoading(false);
         }
@@ -34,9 +40,10 @@ export function LogInDash(): React.ReactElement {
         if (e.target.name === 'password') setPassword(e.target.value);
     };
 
-    /* <div className={`${style.container} ${style.containerLogin}`}> */
-    return (
-        <div className={(style.container, style.containerLogin)}>
+    return loading ? (
+        <Loading />
+    ) : (
+        <div className={style.flexContainerLogin}>
             <div className={style.loginFormContainer}>
                 <form onSubmit={handleSubmit}>
                     <div className={style.avatar}>
@@ -72,7 +79,7 @@ export function LogInDash(): React.ReactElement {
                             className={style.signInButton}
                             // disabled={!password || !email}
                         >
-                            {loading ? 'Logging in...' : 'Log In'}
+                            Log in
                         </button>
                     </div>
                 </form>

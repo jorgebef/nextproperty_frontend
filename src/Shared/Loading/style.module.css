@@ -1,0 +1,23 @@
+@import '../../Shared/Styles/general.module.css';
+
+/* ################################################################### */
+/* ############################# Loading ############################# */
+/* ################################################################### */
+
+.loadingContainer {
+    background-color: none;
+    color: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: fixed;
+    top: calc(50% - 120px);
+    left: calc(50% - 100px);
+}
+
+.loadingContainer p {
+    font-size: 40px;
+    font-weight: bolder;
+    margin-top: 35px;
+    color: var(--nextBlue);
+}

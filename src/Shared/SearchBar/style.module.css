@@ -1,0 +1,9 @@
+.searchBarContainer {
+    display: flex;
+    position: center !important;
+}
+
+.searchBarContainer form {
+    flex-grow: 1;
+    position: center !important;
+}

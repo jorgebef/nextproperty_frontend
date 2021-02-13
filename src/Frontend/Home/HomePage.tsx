@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
 import image1 from './work-1.jpg';
 import handshakeIcon from './handshake-solid.svg';
 
-import '../Shared/styleFront.css';
+import '../../Shared/styleFront.css';
 
-export function HomePage(): React.ReactElement {
+export const HomePage = (): React.ReactElement => {
     return (
         <div id="frontPageContainer">
             <div className="pack">
@@ -90,4 +90,4 @@ export function HomePage(): React.ReactElement {
             </div>
         </div>
     );
-}
+};

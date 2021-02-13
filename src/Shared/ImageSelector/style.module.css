@@ -1,0 +1,50 @@
+@import '../Styles/rootParams.module.css';
+@import '../Styles/general.module.css';
+
+/* ########################################################################### */
+/* ############################# Image Selector  ############################# */
+/* ########################################################################### */
+
+input[type='file'] {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+img {
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+input[type='file'] + label {
+    font-weight: bold;
+    background-color: var(--nextBlue);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    display: inline-block;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+input[type='file'] + label.withImgs {
+    background-color: var(--nextRed) !important;
+}
+
+.imgPreview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+.imgPreview label {
+    margin-bottom: 1rem;
+}
+.imgPreview label,
+.imgPreview label img,
+.imgPreview label input {
+    vertical-align: middle;
+    height: 180px;
+    width: auto;
+}

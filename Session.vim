@@ -1,71 +1,72 @@
 let SessionLoad = 1
-let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/Documents/Github/nextproperty_frontend
+silent tabonly
+cd ~/Documents/Github/Nextproperty-website/client
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +66 src/SharedGlobal/helperFuncs/crud.helpers.ts
-badd +75 src/Dashboard/Shared/MapSelector/MapSelector.tsx
-badd +6 src/Frontend/NavBar/NavBarFront.tsx
-badd +6 src/Frontend/Home/HomePage.tsx
-badd +161 src/Dashboard/Create/CreateProperty.tsx
-badd +27 src/Dashboard/List/ListDash.tsx
-badd +38 src/Dashboard/Shared/ImageSelector/ImageSelector.tsx
-badd +60 src/Dashboard/LogIn/LogInDash.tsx
-badd +105 src/Dashboard/Shared/styleDash.module.css
-badd +186 src/Dashboard/Edit/EditProperty.tsx
-badd +28 src/Dashboard/Delete/DeleteProperty.tsx
-badd +36 src/Dashboard/NavBar/NavBarDash.tsx
+badd +32 src/App.tsx
+badd +38 src/Dashboard/LogIn/LogInDash.tsx
+badd +42 src/routers/DashboardRoutes.tsx
+badd +50 src/Shared/Helpers/auth.helpers.ts
+badd +5 src/Shared/Helpers/vars.ts
+badd +2 src/Dashboard/Create/CreateProperty.tsx
+badd +76 src/Shared/NavBar/NavBarDash.tsx
 argglobal
 %argdel
-edit src/Dashboard/NavBar/NavBarDash.tsx
+edit src/Shared/Helpers/auth.helpers.ts
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 1wincmd h
 wincmd w
 set nosplitbelow
+set nosplitright
 wincmd t
 set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-wincmd =
+exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
+exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
 argglobal
-let s:l = 30 - ((1 * winheight(0) + 33) / 66)
+let s:l = 49 - ((35 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-30
-normal! 010|
+49
+normal! 065|
 wincmd w
 argglobal
-if bufexists("src/Dashboard/Shared/styleDash.module.css") | buffer src/Dashboard/Shared/styleDash.module.css | else | edit src/Dashboard/Shared/styleDash.module.css | endif
+if bufexists("src/Shared/Helpers/vars.ts") | buffer src/Shared/Helpers/vars.ts | else | edit src/Shared/Helpers/vars.ts | endif
 if &buftype ==# 'terminal'
-  silent file src/Dashboard/Shared/styleDash.module.css
+  silent file src/Shared/Helpers/vars.ts
 endif
-let s:l = 75 - ((38 * winheight(0) + 33) / 66)
+let s:l = 7 - ((6 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-75
-normal! 043|
+7
+normal! 0
 wincmd w
-wincmd =
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 110 + 110) / 220)
+exe 'vert 2resize ' . ((&columns * 109 + 110) / 220)
 tabnext 1
-if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOFc
+set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOFAc
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
-let &so = s:so_save | let &siso = s:siso_save
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 let g:this_session = v:this_session
 let g:this_obsession = v:this_session
 doautoall SessionLoadPost

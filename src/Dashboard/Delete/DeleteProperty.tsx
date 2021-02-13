@@ -1,34 +1,40 @@
-import React, { useState } from 'react';
-/* import { AppContext } from '../App'; */
-import { useParams } from 'react-router-dom';
-import { PropType, propertyDefault } from '../../SharedGlobal';
-import { getPropSingle, crudDelete } from '../../SharedGlobal/helperFuncs';
+import * as React from 'react';
+import {useParams} from 'react-router-dom';
+import {PropType, propertyDefault} from '../../Shared/Helpers';
+import {getPropSingle, crudDelete} from '../../Shared/Helpers';
+import {AppContext} from '../../App';
 
-import style from '../Shared/styleDash.module.css';
+import compStyle from './style.module.css';
+import generalStyle from '../../Shared/Styles/general.module.css';
+const style = {...compStyle, ...generalStyle};
 
-export function DeleteProperty(): React.ReactElement {
+export const DeleteProperty = (): React.ReactElement => {
     // Set the state and use properties in the state
-    const { id } = useParams();
-    /* const ctx = React.useContext(AppContext); */
+    const ctx = React.useContext(AppContext);
 
-    const [property, setProperty] = useState<PropType>(propertyDefault);
+    // Grabbing the id specified in the url
+    const {id}: any = useParams();
+
+    const [property, setProperty] = React.useState<PropType>(propertyDefault);
 
     React.useEffect(() => {
-        getPropSingle(id).then((p: PropType) => {
+        getPropSingle(ctx, id).then((p: PropType) => {
             setProperty({
                 ...property,
                 ...p,
             });
         });
-    }, [id, property]);
+    }, []);
 
     const handleDelete = (e: React.FormEvent) => {
         e.preventDefault();
-        crudDelete(id);
+        crudDelete(ctx, id).then(() => {
+            window.location.href = '/dashboard/list';
+        });
     };
 
     return (
-        <div className={style.container}>
+        <div className={style.flexContainer}>
             <div className="card card-body my-3 mx-5">
                 <form onSubmit={handleDelete}>
                     <div className="form-group">
@@ -52,4 +58,4 @@ export function DeleteProperty(): React.ReactElement {
             </div>
         </div>
     );
-}
+};

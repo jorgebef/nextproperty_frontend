@@ -1,0 +1,80 @@
+@import '../../Shared/Styles/rootParams.module.css';
+
+.flexPropContainer {
+    background-color: white;
+    border-radius: var(--card-radius);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    /* margin-right: 12rem; */
+    /* margin-left: 12rem; */
+    /* display: flex; */
+    /* flex: 1 1 300px; */
+    min-width: 50rem;
+    /* max-width: 60rem; */
+    align-self: center;
+    justify-self: center;
+    /* margin: auto; */
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.flexPropContainer .propCard {
+    --padding-sides: 5rem;
+    flex-grow: 1;
+    padding-left: var(--padding-sides);
+    padding-right: var(--padding-sides);
+}
+
+.flexPropContainer .propCard .formInline {
+    display: flex;
+    justify-content: center;
+    line-height: 1.8rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.flexPropContainer .propCard .formInline label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.flexPropContainer .propCard .formInline input,
+.flexPropContainer .propCard .formInline textarea {
+    font-family: inherit;
+    border-style: solid;
+    font-size: 16px;
+    border-radius: var(--button-radius) !important;
+    border-width: var(--border-width);
+    border-color: var(--border-grey) !important;
+    flex-grow: 1;
+    margin-right: 0.5rem;
+}
+.flexPropContainer .propCard .formInline textarea[name='description'] {
+    height: 4rem;
+}
+.flexPropContainer .propCard .formInline input[id='new_build'] {
+    flex-grow: 0;
+    height: 1.4rem;
+    margin-right: 2rem;
+}
+.flexPropContainer .propCard .formInline label[for='new_build'] {
+    margin-left: 1rem;
+}
+
+.flexPropContainer .propCard .formInline input.inputError {
+    border-color: var(--nextRed) !important;
+}
+
+.flexPropContainer .propCard .formInline .timestamp {
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 3rem;
+    background-color: var(--bgLight) !important;
+}
+
+.flexPropContainer .propCard button {
+    width: 100%;
+    margin-top: 1.5rem;
+}

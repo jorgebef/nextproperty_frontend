@@ -1,0 +1,144 @@
+@import '../Styles/rootParams.module.css';
+
+.navbar {
+    height: 4rem;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+}
+.navbar.top {
+    transition-duration: var(--transitionDuration);
+    background-color: var(--nextBlue) !important;
+    /* border-bottom: 2px solid var(--nextBlue); */
+}
+.navbar.scrolling {
+    height: 3.2rem;
+    transition-duration: var(--transitionDuration);
+    background-color: white !important;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    border: 0;
+}
+
+.navbar .navbar_nav {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1.5fr 1fr; */
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    list-style-type: none;
+}
+
+.navbar .navbar_nav .logo_item {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .navbar_nav .logo_item .logo_link,
+.navbar .navbar_nav .logo_item .logo_link:visited {
+    text-decoration: none;
+}
+.navbar.top .navbar_nav .logo_item .logo_link,
+.navbar.top .navbar_nav .logo_item .logo_link:visited {
+    transition-duration: var(--transitionDuration);
+    color: white;
+}
+.navbar.scrolling .navbar_nav .logo_item .logo_link,
+.navbar.scrolling .navbar_nav .logo_item .logo_link:visited {
+    transition-duration: var(--transitionDuration);
+    color: var(--nextBlue);
+}
+
+.navbar .navbar_nav .links_item {
+    width: 70%;
+    height: 100%;
+    /* display: grid; */
+    /* grid-template-columns: repeat(4, 1fr); */
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    column-gap: 3rem;
+    align-items: stretch;
+    justify-items: stretch;
+    text-align: center;
+}
+
+/* THIS AFECTS THE LINK which in turn are really just <a> tags */
+.navbar .navbar_nav .links_item .nav_link {
+    --link-icon-width: 1.1rem;
+    --link-icon-separation: 0.6rem;
+    --link-icon-color: #dfdfdf;
+
+    display: flex;
+    /* min-width: calc(5rem + var(--link-icon-width) + var(--link-icon-separation)); */
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: Benton, Arial, Sans-Serif;
+    letter-spacing: 1.4px;
+    /* font-weight: bold; */
+    text-transform: uppercase;
+}
+.navbar .navbar_nav .links_item .nav_link svg {
+    position: relative;
+    opacity: 0;
+    left: 0.5rem;
+    fill: var(--link-icon-color);
+    /* right: var(--link-icon-separation); */
+    width: 0;
+    height: auto;
+}
+.navbar.top .nav_link span {
+    color: white;
+}
+.navbar.scrolling .nav_link span {
+    color: var(--nextBlue);
+}
+
+/* This is for the underline that appears under the links */
+.navbar .navbar_nav .links_item .nav_link span::before {
+    /* width: calc(100% + var(--link-icon-width) + var(--link-icon-separation)); */
+    width: 0;
+    height: 2px;
+    top: 1.6rem;
+    /* left: -1.7rem; */
+    content: '';
+    position: absolute;
+    background-color: var(--nextRed);
+    transition: var(--transitionDuration);
+    opacity: 0;
+}
+.navbar .navbar_nav .links_item .nav_link:hover span::before {
+    /* width: calc(100% + var(--link-icon-width) + var(--link-icon-separation)); */
+    width: 100%;
+    opacity: 1;
+}
+
+.navbar .navbar_nav .links_item .nav_link span,
+.navbar .navbar_nav .links_item .nav_link svg {
+    transition: var(--transitionDuration);
+}
+.navbar .navbar_nav .links_item .nav_link:hover svg,
+.navbar .navbar_nav .links_item .nav_link:hover span {
+    -webkit-transform: translateY(-0.3rem);
+    /* -webkit-transform: translateX(0px); */
+}
+.navbar .navbar_nav .links_item .nav_link:hover svg {
+    width: var(--link-icon-width);
+    /* width: 0; */
+    opacity: 1;
+    fill: var(--link-icon-color);
+}
+
+.navbar .navbar_nav .log_item {
+    width: 10%;
+    align-content: flex-end;
+    align-items: flex-end;
+}

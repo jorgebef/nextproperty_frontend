@@ -1,0 +1,679 @@
+/* :root { */
+/*     font-size: 16px; */
+/*     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+
+/*     /1* --button-radius: 0.25rem; *1/ */
+/*     --button-radius: 0rem; */
+/*     --button-padding: 9px 20px; */
+
+/*     /1* --card-radius: 0.35rem; *1/ */
+/*     --card-radius: 0rem; */
+/*     --card-shadow: 1px 1px 7px rgba(0, 0, 0, 0.05); */
+/*     --login-shadow: 0px 4px 9px rgba(0, 0, 0, 0.15); */
+/*     --navbar-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+
+/*     --border-width: 1.5px; */
+
+/*     --text-primary: #fff; */
+/*     --text-secondary: #2f2f2f; */
+
+/*     --bgLight: #e7e7e7; */
+/*     --bgMid: #d8d8d8; */
+/*     --bg-dark: #6f6f6f; */
+/*     --border-grey: #dfdfdf; */
+/*     --dark-grey: #2f2f2f; */
+/*     --red: #de2f35; */
+/*     --blue: #2290cf; */
+/*     --nextBlue: #002349; */
+/*     --nextRed: #c43828; */
+
+/*     --transitionDuration: 300ms; */
+/* } */
+
+.pack {
+    /* display: block; */
+    height: auto;
+}
+
+.pack .image {
+    display: block;
+    margin-top: -250px;
+    width: 100%;
+    height: auto;
+    z-index: -999;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.pack .overlay {
+    position: relative;
+    bottom: 450px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: 0.5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.pack:hover .overlay {
+    opacity: 1;
+}
+
+.pack .arrowContainer {
+    position: relative;
+    bottom: 360px;
+    width: 100%;
+}
+
+.arrowContainer .arrows {
+    width: 60px;
+    display: block;
+    margin: auto;
+}
+
+.arrows path {
+    stroke: #fff;
+    fill: transparent;
+    stroke-width: 4px;
+    animation: arrow 2s infinite;
+    -webkit-animation: arrow 2s infinite;
+}
+
+@keyframes arrow {
+    0% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/ {
+    0% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.arrows path.a1 {
+    animation-delay: -1s;
+    -webkit-animation-delay: -1s; /* Safari 和 Chrome */
+}
+
+.arrows path.a2 {
+    animation-delay: -0.5s;
+    -webkit-animation-delay: -0.5s; /* Safari 和 Chrome */
+}
+
+.arrows path.a3 {
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s; /* Safari 和 Chrome */
+}
+
+#features {
+    background-color: rgba(240, 240, 240, 1);
+    align-items: center;
+    text-align: center;
+}
+
+.roundIcon {
+    margin: auto;
+    padding: 10px;
+    font-size: 38px;
+    transition: all 0.5s;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #6372ff 0%, #5ca9fb 100%);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* ###################################################################### */
+/* ############################# Containers ############################# */
+/* ###################################################################### */
+
+.flexContainer,
+.flexContainerLogin {
+    --padding-top: 6rem;
+    --padding-sides: 3rem;
+    --padding-bottom: 5rem;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    padding-right: var(--padding-sides);
+    padding-left: var(--padding-sides);
+    align-content: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: calc(100vh - calc(var(--padding-top) + var(--padding-bottom)));
+    background-color: var(--bgLight);
+}
+.flexContainerLogin {
+    background-color: var(--bgMid);
+}
+
+/* ################################################################## */
+/* ############################# NavBar ############################# */
+/* ################################################################## */
+
+.navbar {
+    height: 4rem;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+}
+.navbar.top {
+    transition-duration: var(--transitionDuration);
+    background-color: var(--nextBlue) !important;
+    /* border-bottom: 2px solid var(--nextBlue); */
+}
+.navbar.scrolling {
+    height: 3rem;
+    transition-duration: var(--transitionDuration);
+    background-color: white !important;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    border: 0;
+}
+
+.navbar .navbar_nav {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    align-items: center;
+    justify-items: center;
+    list-style-type: none;
+}
+
+.navbar .navbar_nav .logo_item {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .navbar_nav .logo_item .logo_link,
+.navbar .navbar_nav .logo_item .logo_link:visited {
+    text-decoration: none;
+}
+.navbar.top .navbar_nav .logo_item .logo_link,
+.navbar.top .navbar_nav .logo_item .logo_link:visited {
+    transition-duration: var(--transitionDuration);
+    color: white;
+}
+.navbar.scrolling .navbar_nav .logo_item .logo_link,
+.navbar.scrolling .navbar_nav .logo_item .logo_link:visited {
+    transition-duration: var(--transitionDuration);
+    color: var(--nextBlue);
+}
+
+.navbar .navbar_nav .links_item {
+    width: 60%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 1rem;
+    align-items: stretch;
+    justify-items: stretch;
+    text-align: center;
+}
+
+/* THIS AFECTS THE LINK which in turn are really just <a> tags */
+.navbar .navbar_nav .links_item .nav_link {
+    --link-icon-width: 1.1rem;
+    --link-icon-separation: 0.6rem;
+    --link-icon-color: #dfdfdf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: Benton, Arial, Sans-Serif;
+    letter-spacing: 1.4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.navbar .navbar_nav .links_item .nav_link svg {
+    position: relative;
+    opacity: 0;
+    left: 0.5rem;
+    fill: var(--link-icon-color);
+    /* right: var(--link-icon-separation); */
+    width: 0;
+    height: auto;
+}
+.navbar.top .nav_link span {
+    color: white;
+}
+.navbar.scrolling .nav_link span {
+    color: var(--nextBlue);
+}
+
+/* This is for the underline that appears under the links */
+.navbar .navbar_nav .links_item .nav_link span::before {
+    /* width: calc(100% + var(--link-icon-width) + var(--link-icon-separation)); */
+    width: 0;
+    height: 2px;
+    top: 1.4rem;
+    /* left: -1.7rem; */
+    content: '';
+    position: absolute;
+    background-color: var(--nextRed);
+    transition: var(--transitionDuration);
+    opacity: 0;
+}
+.navbar .navbar_nav .links_item .nav_link:hover span::before {
+    width: calc(100% + var(--link-icon-width) + var(--link-icon-separation));
+    opacity: 1;
+}
+
+.navbar .navbar_nav .links_item .nav_link span,
+.navbar .navbar_nav .links_item .nav_link svg {
+    transition: var(--transitionDuration);
+}
+.navbar .navbar_nav .links_item .nav_link:hover svg,
+.navbar .navbar_nav .links_item .nav_link:hover span {
+    /* -webkit-transform: translateY(-5px); */
+    -webkit-transform: translateX(0px);
+}
+.navbar .navbar_nav .links_item .nav_link:hover svg {
+    width: var(--link-icon-width);
+    /* width: 0; */
+    opacity: 1;
+    fill: var(--link-icon-color);
+}
+
+/* ################################################################# */
+/* ############################# Login ############################# */
+/* ################################################################# */
+
+.loginFormContainer {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.loginFormContainer form {
+    width: 23rem;
+    height: 15rem;
+    border-radius: var(--card-radius);
+    font-size: 18px;
+    background-color: white;
+    box-shadow: var(--login-shadow);
+    padding: 30px;
+    position: relative;
+    text-align: center;
+}
+
+.loginFormContainer form .avatar {
+    --avatar-dimensions: 135px;
+    position: absolute;
+    top: -90px;
+    left: calc(50% - calc(var(--avatar-dimensions) / 2) - 15px);
+    width: var(--avatar-dimensions);
+    height: var(--avatar-dimensions);
+    border-radius: 50%;
+    z-index: 9;
+    background-color: var(--red);
+    padding: 15px;
+    box-shadow: var(--login-shadow);
+}
+
+.loginFormContainer form .avatar img {
+    width: 100%;
+}
+
+.loginFormContainer form h2 {
+    font-size: 28px;
+    margin: 55px 0 35px;
+}
+
+.loginFormContainer form .formElement {
+    width: 100%;
+    margin: 0.3rem auto;
+}
+
+.loginFormContainer form .formElement input,
+.loginFormContainer form .formElement input:active {
+    text-align: center;
+    height: 1.5rem;
+    width: 100%;
+    background-color: var(--bgLight);
+    box-shadow: none !important;
+    border-style: solid;
+    border-radius: var(--button-radius) !important;
+    border-width: var(--border-width);
+    border-color: var(--border-grey) !important;
+}
+
+.loginFormContainer form .formElement input.error {
+    border-color: var(--nextRed) !important;
+}
+
+.loginFormContainer form .formElement button,
+.loginFormContainer form .formElement button:active {
+    font-size: 16px;
+    margin-top: 0.5rem;
+    width: 60%;
+    font-weight: bold;
+    padding: var(--button-padding);
+    border-radius: var(--button-radius);
+    cursor: pointer;
+    background: #43ab4d;
+    transition-duration: var(--transitionDuration);
+    border: 0 !important;
+}
+.loginFormContainer form .formElement button:disabled {
+    background-color: var(--bg-dark);
+}
+
+/* ##################################################################### */
+/* ############################# List Page ############################# */
+/* ##################################################################### */
+
+.flexGrid {
+    padding-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.flexGrid .propCell {
+    flex: 0 1 350px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    align-items: center;
+    margin: 1rem;
+    border-style: solid;
+    border: 0;
+    box-shadow: var(--card-shadow);
+    color: var(--nextBlue);
+}
+
+.flexGrid .propCell .propPrice {
+    background-color: var(--nextBlue);
+    width: 100%;
+    color: white;
+    font-family: inherit;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 0.25rem 0 0.05rem;
+}
+/* .grid .propCell .propPrice:hover { */
+/*     transition-duration: var(--transition-speed); */
+/*     background-color: var(--next-blue); */
+/* } */
+
+.flexGrid .propCell h1.propTitle {
+    height: 1.2rem;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: 20px;
+    padding: 0.4rem;
+}
+
+.flexGrid .propCell img {
+    object-fit: cover;
+    border-top-left-radius: var(--card-radius);
+    border-top-right-radius: var(--card-radius);
+    width: 100%;
+    margin: auto;
+    height: 20rem;
+    display: block;
+}
+
+.flexGrid .propCell .propDesc {
+    background-color: #fff;
+    border-radius: var(--button-radius);
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    text-align: left;
+    height: 5rem;
+    font-size: inherit;
+    overflow: scroll;
+}
+.flexGrid .propCell .propDesc::-webkit-scrollbar {
+    display: none;
+}
+
+.flexGrid .propCell .propStats {
+    text-align: left;
+    list-style: none;
+    padding-left: 2rem;
+    font-size: inherit;
+}
+
+.flexGrid .propCell .actionButtons {
+    margin: 1.5rem 1rem 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1rem;
+}
+
+.flexGrid .propCell .propFooter {
+    border-bottom-left-radius: var(--card-radius);
+    border-bottom-right-radius: var(--card-radius);
+    background-color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 0.4rem;
+}
+
+/* ######################################################################## */
+/* ########################### Single Prop Dash ########################### */
+/* ######################################################################## */
+
+.flexPropContainer {
+    background-color: white;
+    border-radius: var(--card-radius);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    /* margin-right: 12rem; */
+    /* margin-left: 12rem; */
+    /* display: flex; */
+    /* flex: 1 1 300px; */
+    min-width: 50rem;
+    /* max-width: 60rem; */
+    align-self: center;
+    justify-self: center;
+    /* margin: auto; */
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.flexPropContainer .propCard {
+    --padding-sides: 5rem;
+    flex-grow: 1;
+    padding-left: var(--padding-sides);
+    padding-right: var(--padding-sides);
+}
+
+.flexPropContainer .propCard .formInline {
+    width: 100%;
+    display: flex;
+    line-height: 1.8rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.flexPropContainer .propCard .formInline label {
+    font-weight: bold;
+}
+
+.flexPropContainer .propCard .formInline input {
+    border-style: solid;
+    font-size: 16px;
+    border-radius: var(--button-radius) !important;
+    border-width: var(--border-width);
+    border-color: var(--border-grey) !important;
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.flexPropContainer .propCard .formInline input[id='new_build'] {
+    flex-grow: 0;
+    height: 1.4rem;
+    margin-right: 2rem;
+}
+.flexPropContainer .propCard .formInline label[for='new_build'] {
+    margin-left: 1rem;
+    margin-right: 0.2rem;
+}
+
+.flexPropContainer .propCard .formInline input.inputError {
+    border-color: var(--nextRed) !important;
+}
+
+.flexPropContainer .propCard button {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* ########################################################################### */
+/* ############################# Image Selector  ############################# */
+/* ########################################################################### */
+
+.flexPropContainer .propCard input[type='file'] {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.flexPropContainer .propCard img {
+    /* display: inline; */
+    /* height: 3.5rem; */
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.flexPropContainer .propCard input[type='file'] + label {
+    font-weight: bold;
+    background-color: var(--nextBlue);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+.flexPropContainer .propCard input[type='file'] + label.withImgs {
+    background-color: var(--nextRed) !important;
+}
+
+/* ############################################################### */
+/* ############################# Map ############################# */
+/* ############################################################### */
+
+.mapContainer {
+    border-radius: var(--card-radius);
+}
+
+.mapContainer .mapWrapper {
+    width: 100%;
+    height: 500px;
+}
+
+.mapContainer .mapWrapper .mapMarker img {
+    --markerSize: 50px;
+    width: var(--markerSize);
+    height: var(--markerSize);
+    margin: -65px calc((var(--markerSize) / 2) * (-1)) auto;
+}
+
+/* ################################################################### */
+/* ############################# Loading ############################# */
+/* ################################################################### */
+
+.loadingContainer {
+    background-color: none;
+    color: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: fixed;
+    top: calc(50% - 120px);
+    left: calc(50% - 100px);
+}
+
+.loadingContainer p {
+    font-size: 40px;
+    font-weight: bolder;
+    margin-top: 35px;
+    color: var(--nextBlue);
+}
+
+/* ################################################################### */
+/* ############################# Buttons ############################# */
+/* ################################################################### */
+
+.btnGreen,
+.btnBlue,
+.btnYellow,
+.btnRed {
+    transition: var(--transitionDuration);
+    padding: var(--button-padding);
+    font-size: 100%;
+    font-family: inherit;
+    border: 0;
+    border-radius: var(--button-radius);
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.btnYellow {
+    background-color: gold;
+}
+.btnYellow:hover {
+    color: gold;
+}
+
+.btnBlue {
+    background-color: var(--blue);
+}
+
+.btnGreen {
+    background-color: green;
+}
+
+.btnRed {
+    background-color: var(--nextRed);
+}
+.btnRed:hover {
+    color: black;
+}

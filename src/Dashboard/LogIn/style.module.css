@@ -1,0 +1,87 @@
+@import '../../Shared/Styles/rootParams.module.css';
+
+/* ################################################################# */
+/* ############################# Login ############################# */
+/* ################################################################# */
+
+.loginFormContainer {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.loginFormContainer form {
+    width: 23rem;
+    height: 15rem;
+    border-radius: var(--card-radius);
+    font-size: 18px;
+    background-color: white;
+    box-shadow: var(--login-shadow);
+    padding: 30px;
+    position: relative;
+    text-align: center;
+}
+
+.loginFormContainer form .avatar {
+    --avatar-dimensions: 135px;
+    position: absolute;
+    top: -90px;
+    left: calc(50% - calc(var(--avatar-dimensions) / 2) - 15px);
+    width: var(--avatar-dimensions);
+    height: var(--avatar-dimensions);
+    border-radius: 50%;
+    z-index: 9;
+    background-color: var(--red);
+    padding: 15px;
+    box-shadow: var(--login-shadow);
+}
+
+.loginFormContainer form .avatar img {
+    width: 100%;
+}
+
+.loginFormContainer form h2 {
+    font-size: 28px;
+    margin: 55px 0 35px;
+}
+
+.loginFormContainer form .formElement {
+    width: 100%;
+    margin: 0.3rem auto;
+}
+
+.loginFormContainer form .formElement input,
+.loginFormContainer form .formElement input:active {
+    text-align: center;
+    height: 1.5rem;
+    width: 100%;
+    background-color: var(--bgLight);
+    box-shadow: none !important;
+    border-style: solid;
+    border-radius: var(--button-radius) !important;
+    border-width: var(--border-width);
+    border-color: var(--border-grey) !important;
+}
+
+.loginFormContainer form .formElement input.error {
+    border-color: var(--nextRed) !important;
+}
+
+.loginFormContainer form .formElement button,
+.loginFormContainer form .formElement button:active {
+    font-size: 16px;
+    margin-top: 0.5rem;
+    width: 60%;
+    /* font-weight: bold; */
+    padding: var(--button-padding);
+    border-radius: var(--button-radius);
+    cursor: pointer;
+    background: #43ab4d;
+    transition-duration: var(--transitionDuration);
+    border: 0 !important;
+}
+.loginFormContainer form .formElement button:disabled {
+    background-color: var(--bg-dark);
+}
