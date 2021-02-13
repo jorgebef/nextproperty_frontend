@@ -8,7 +8,7 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 src/App.tsx
+badd +10 src/App.tsx
 badd +38 src/Dashboard/LogIn/LogInDash.tsx
 badd +42 src/routers/DashboardRoutes.tsx
 badd +65 src/Shared/Helpers/auth.helpers.ts
@@ -45,12 +45,12 @@ if bufexists("package.json") | buffer package.json | else | edit package.json | 
 if &buftype ==# 'terminal'
   silent file package.json
 endif
-let s:l = 37 - ((36 * winheight(0) + 28) / 57)
+let s:l = 54 - ((53 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-37
-normal! 028|
+54
+normal! 0
 wincmd w
 2wincmd w
 wincmd =
