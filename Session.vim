@@ -15,7 +15,7 @@ badd +50 src/Shared/Helpers/auth.helpers.ts
 badd +7 src/Shared/Helpers/vars.ts
 badd +2 src/Dashboard/Create/CreateProperty.tsx
 badd +76 src/Shared/NavBar/NavBarDash.tsx
-badd +18 package.json
+badd +1 package.json
 argglobal
 %argdel
 edit src/Shared/Helpers/auth.helpers.ts
@@ -42,9 +42,9 @@ normal! zt
 normal! 065|
 wincmd w
 argglobal
-if bufexists("src/Shared/Helpers/vars.ts") | buffer src/Shared/Helpers/vars.ts | else | edit src/Shared/Helpers/vars.ts | endif
+if bufexists("package.json") | buffer package.json | else | edit package.json | endif
 if &buftype ==# 'terminal'
-  silent file src/Shared/Helpers/vars.ts
+  silent file package.json
 endif
 let s:l = 1 - ((0 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
