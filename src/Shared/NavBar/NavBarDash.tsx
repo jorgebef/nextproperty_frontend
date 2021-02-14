@@ -1,11 +1,11 @@
 import * as React from "react";
-import { AppContext } from "../../App";
-import { Redirect, Link } from "react-router-dom";
-import { signOut } from "../../Shared/Helpers";
+import {AppContext} from "../../App";
+import {Redirect, Link} from "react-router-dom";
+import {signOut} from "../../Shared/Helpers";
 
 import compStyle from "./style.module.css";
 import generalStyle from "../Styles/general.module.css";
-const style = { ...compStyle, ...generalStyle };
+const style = {...compStyle, ...generalStyle};
 
 export const NavBarDash = (): React.ReactElement => {
     const ctx = React.useContext(AppContext);
@@ -60,17 +60,17 @@ export const NavBarDash = (): React.ReactElement => {
         <nav
             className={`${style.navbar} ${
                 scrolling ? style.scrolling : style.top
-            }`}
+                }`}
         >
             <ul className={style.navbar_nav}>
-                <li className={style.logo_item}>
+                <Link to='/dashboard/list' >
                     <a
                         href="http://localhost:3000/dashboard/list"
                         className={style.logo_link}
                     >
                         NextProperty Control Panel
                     </a>
-                </li>
+                </Link>
                 <li className={style.links_item}>
                     <Link to="/" className={style.nav_link}>
                         <span>Home</span>
@@ -81,7 +81,7 @@ export const NavBarDash = (): React.ReactElement => {
                             window.location.href === "/dashboard/create"
                                 ? style.active
                                 : ""
-                        }`}
+                            }`}
                     >
                         <span>Create</span>
                     </Link>
@@ -94,6 +94,6 @@ export const NavBarDash = (): React.ReactElement => {
                 </li>
                 <li className={style.log_item}>{button}</li>
             </ul>
-        </nav>
+        </nav >
     );
 };
