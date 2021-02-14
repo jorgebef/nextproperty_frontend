@@ -13,7 +13,8 @@ badd +38 src/Dashboard/LogIn/LogInDash.tsx
 badd +38 src/routers/DashboardRoutes.tsx
 badd +13 src/Shared/Helpers/auth.helpers.ts
 badd +99 src/Shared/Helpers/crud.helpers.ts
-badd +0 src/Shared/NavBar/NavBarDash.tsx
+badd +69 src/Shared/NavBar/NavBarDash.tsx
+badd +54 node_modules/react-scripts/lib/react-app.d.ts
 argglobal
 %argdel
 edit src/App.tsx
@@ -50,7 +51,6 @@ exe s:l
 normal! zt
 1
 normal! 0
-lcd ~/Documents/Github/Nextproperty-website/client
 wincmd w
 2wincmd w
 exe 'vert 1resize ' . ((&columns * 109 + 110) / 220)
