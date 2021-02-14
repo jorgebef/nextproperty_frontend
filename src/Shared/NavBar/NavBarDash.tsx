@@ -63,14 +63,13 @@ export const NavBarDash = (): React.ReactElement => {
                 }`}
         >
             <ul className={style.navbar_nav}>
-                <Link to='/dashboard/list' >
-                    <a
-                        href="http://localhost:3000/dashboard/list"
-                        className={style.logo_link}
-                    >
-                        NextProperty Control Panel
-                    </a>
+                <Link to='/dashboard/list'
+                    className={style.logo_link}
+                >
                 </Link>
+
+                    NextProperty Control Panel
+
                 <li className={style.links_item}>
                     <Link to="/" className={style.nav_link}>
                         <span>Home</span>
