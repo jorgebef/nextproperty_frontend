@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import style from './style.module.css';
 
-import { ReactComponent as HomeIcon } from '../../Shared/Images/home-solid.svg';
-import { ReactComponent as CreateIcon } from '../../Shared/Images/plus-square-regular.svg';
-import { ReactComponent as ListIcon } from '../../Shared/Images/list-solid.svg';
-import { ReactComponent as ExportIcon } from '../../Shared/Images/share-square-solid.svg';
+import {ReactComponent as HomeIcon} from '../../Shared/Images/home-solid.svg';
+import {ReactComponent as CreateIcon} from '../../Shared/Images/plus-square-regular.svg';
+import {ReactComponent as ListIcon} from '../../Shared/Images/list-solid.svg';
+import {ReactComponent as ExportIcon} from '../../Shared/Images/share-square-solid.svg';
 
 export function NavBarFront(): React.ReactElement {
     const [scrolling, setScrolling] = React.useState(false);
@@ -25,9 +25,9 @@ export function NavBarFront(): React.ReactElement {
         <nav className={`${style.navbar} ${scrolling ? style.scrolling : style.top}`}>
             <ul className={style.navbar_nav}>
                 <li className={style.logo_item}>
-                    <a href="http://localhost:3000/dashboard/list" className={style.logo_link}>
+                    <Link to='/dashboard/list' className={style.logo_link} >
                         NextProperty Control Panel
-                    </a>
+                    </Link>
                 </li>
                 <li className={style.links_item}>
                     <Link
