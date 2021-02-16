@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch, HashRouter } from 'react-router-dom';
 /* import 'bootstrap/dist/css/bootstrap.min.css'; */
 import './main.css';
 
-import {NavBarFront, NavBarDash} from './Shared/NavBar';
+import { NavBarFront, NavBarDash } from './Shared/NavBar';
 
-import {ListDash} from './Dashboard/List';
-import {LogInDash} from './Dashboard/LogIn';
-import {CreateProperty} from './Dashboard/Create';
-import {EditProperty} from './Dashboard/Edit';
-import {DeleteProperty} from './Dashboard/Delete';
+import { ListDash } from './Dashboard/List';
+import { LogInDash } from './Dashboard/LogIn';
+import { CreateProperty } from './Dashboard/Create';
+import { EditProperty } from './Dashboard/Edit';
+import { DeleteProperty } from './Dashboard/Delete';
 
-import {ProtectedRoute, LoginRoute} from './routers/DashboardRoutes';
-import {NotFound} from './Dashboard/NotFound';
-import {HomePage} from './Frontend/Home/HomePage';
-import {ResultsPage as ResultsPage} from './Frontend/Results/ResultsPage';
-import {useCookies} from 'react-cookie';
+import { ProtectedRoute, LoginRoute } from './routers/DashboardRoutes';
+import { NotFound } from './Dashboard/NotFound';
+import { HomePage } from './Frontend/Home/HomePage';
+import { ResultsPage as ResultsPage } from './Frontend/Results/ResultsPage';
+import { useCookies } from 'react-cookie';
 
 export const AppContext: React.Context<any> = React.createContext({});
 
@@ -23,21 +23,21 @@ function App(): React.ReactElement {
     // Array<string | React.Dispatch<SetStateAction<string>>> is the type for the state hooks
     const [jwtToken, setjwtToken] = useState(localStorage.getItem('jwtToken') || '');
     /* const [tokenExpiry, setTokenExpiry] = useState(localStorage.getItem('tokenExpiry') || 0); */
-    const [cookies, setCookies] = useCookies(['token'])
+    const [cookies, setCookies] = useCookies(['token']);
     const [propList, setPropList] = useState([]);
     const [auth, setAuth] = useState(false);
 
     const ctx = {
-        jwtToken: {get: jwtToken, set: setjwtToken},
-        cookies: {get: cookies, set: setCookies},
+        jwtToken: { get: jwtToken, set: setjwtToken },
+        cookies: { get: cookies, set: setCookies },
         /* tokenExpiry: { get: tokenExpiry, set: setTokenExpiry }, */
-        propList: {get: propList, set: setPropList},
-        auth: {get: auth, set: setAuth},
+        propList: { get: propList, set: setPropList },
+        auth: { get: auth, set: setAuth },
     };
 
     // const isDash = String(window.location).search('/dashboard') === -1 ? false : true;
     return (
-        <BrowserRouter>
+        <HashRouter>
             <AppContext.Provider value={ctx}>
                 {/* {isDash ? auth ? <NavBarDash /> : undefined : <NavBarFront />} */}
                 {auth ? <NavBarDash /> : <NavBarFront />}
@@ -60,7 +60,7 @@ function App(): React.ReactElement {
                     </Switch>
                 </Route>
             </AppContext.Provider>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
